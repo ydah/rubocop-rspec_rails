@@ -30,7 +30,7 @@ module RuboCop
         #   expect(a).to be(true)
         #   expect(a).to be(false)
         #
-        class MinitestAssertions < Base
+        class MinitestAssertions < RuboCop::Cop::RSpec::Base
           extend AutoCorrector
 
           # :nodoc:

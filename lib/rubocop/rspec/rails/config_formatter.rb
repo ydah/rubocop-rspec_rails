@@ -7,7 +7,7 @@ module RuboCop
     module Rails
       # Builds a YAML config file from two config hashes
       class ConfigFormatter
-        EXTENSION_ROOT_DEPARTMENT = %r{^(RSpec/Rails)}.freeze
+        EXTENSION_ROOT_DEPARTMENT = %r{^(RSpec/Rails/)}.freeze
         SUBDEPARTMENTS = [].freeze
         AMENDMENTS = [].freeze
         COP_DOC_BASE_URL = 'https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/'

@@ -55,6 +55,7 @@ Metrics/BlockLength:
 
 Naming/FileName:
   Exclude:
+    - lib/rubocop/cop/rspec-rails_cops.rb
     - lib/rubocop-rspec-rails.rb
 
 Naming/InclusiveLanguage:
@@ -114,11 +115,6 @@ Style/FormatStringToken:
 
 Style/RequireOrder:
   Enabled: true
-
-RSpec/SpecFilePathFormat:
-  Enabled: true
-  Exclude:
-    - spec/rubocop/cop/rspec/mixin/**/*.rb
 
 # Enable some of RuboCop's pending cops.
 
