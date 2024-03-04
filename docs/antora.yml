@@ -1,4 +1,4 @@
-name: rubocop-rspec
+name: rubocop-rspec-rails
 title: RuboCop RSpec
 version: ~
 nav:

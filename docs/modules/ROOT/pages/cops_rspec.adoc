@@ -18,22 +18,7 @@
 | -
 |===
 
-Checks that left braces for adjacent single line lets are aligned.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-let(:foobar) { blahblah }
-let(:baz) { bar }
-let(:a) { b }
-
-# good
-let(:foobar) { blahblah }
-let(:baz)    { bar }
-let(:a)      { b }
-----
+No documentation
 
 === References
 
@@ -51,22 +36,7 @@ let(:a)      { b }
 | -
 |===
 
-Checks that right braces for adjacent single line lets are aligned.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-let(:foobar) { blahblah }
-let(:baz)    { bar }
-let(:a)      { b }
-
-# good
-let(:foobar) { blahblah }
-let(:baz)    { bar      }
-let(:a)      { b        }
-----
+No documentation
 
 === References
 
@@ -84,29 +54,7 @@ let(:a)      { b        }
 | -
 |===
 
-Check that instances are not being stubbed globally.
-
-Prefer instance doubles over stubbing any instance of a class
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe MyClass do
-  before { allow_any_instance_of(MyClass).to receive(:foo) }
-end
-
-# good
-describe MyClass do
-  let(:my_instance) { instance_double(MyClass) }
-
-  before do
-    allow(MyClass).to receive(:new).and_return(my_instance)
-    allow(my_instance).to receive(:foo)
-  end
-end
-----
+No documentation
 
 === References
 
@@ -125,32 +73,7 @@ end
 | -
 |===
 
-Checks that around blocks actually run the test.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-around do
-  some_method
-end
-
-around do |test|
-  some_method
-end
-
-# good
-around do |test|
-  some_method
-  test.call
-end
-
-around do |test|
-  some_method
-  test.run
-end
-----
+No documentation
 
 === References
 
@@ -168,24 +91,7 @@ end
 | -
 |===
 
-Check for expectations where `be` is used without argument.
-
-The `be` matcher is too generic, as it pass on everything that is not
-nil or false. If that is the exact intend, use `be_truthy`. In all other
-cases it's better to specify what exactly is the expected value.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(foo).to be
-
-# good
-expect(foo).to be_truthy
-expect(foo).to be 1.0
-expect(foo).to be(true)
-----
+No documentation
 
 === References
 
@@ -204,19 +110,7 @@ expect(foo).to be(true)
 | -
 |===
 
-Prefer using `be_empty` when checking for an empty array.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(array).to contain_exactly
-expect(array).to match_array([])
-
-# good
-expect(array).to be_empty
-----
+No documentation
 
 === References
 
@@ -234,30 +128,7 @@ expect(array).to be_empty
 | 2.16
 |===
 
-Check for expectations where `be(...)` can replace `eq(...)`.
-
-The `be` matcher compares by identity while the `eq` matcher compares
-using `==`. Booleans and nil can be compared by identity and therefore
-the `be` matcher is preferable as it is a more strict test.
-
-=== Safety
-
-This cop is unsafe because it changes how values are compared.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(foo).to eq(true)
-expect(foo).to eq(false)
-expect(foo).to eq(nil)
-
-# good
-expect(foo).to be(true)
-expect(foo).to be(false)
-expect(foo).to be(nil)
-----
+No documentation
 
 === References
 
@@ -275,44 +146,7 @@ expect(foo).to be(nil)
 | 2.16
 |===
 
-Check for expectations where `be(...)` can replace `eql(...)`.
-
-The `be` matcher compares by identity while the `eql` matcher
-compares using `eql?`. Integers, floats, booleans, symbols, and nil
-can be compared by identity and therefore the `be` matcher is
-preferable as it is a more strict test.
-
-This cop only looks for instances of `expect(...).to eql(...)`. We
-do not check `to_not` or `not_to` since `!eql?` is more strict
-than `!equal?`. We also do not try to flag `eq` because if
-`a == b`, and `b` is comparable by identity, `a` is still not
-necessarily the same type as `b` since the `#==` operator can
-coerce objects for comparison.
-
-=== Safety
-
-This cop is unsafe because it changes how values are compared.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(foo).to eql(1)
-expect(foo).to eql(1.0)
-expect(foo).to eql(true)
-expect(foo).to eql(false)
-expect(foo).to eql(:bar)
-expect(foo).to eql(nil)
-
-# good
-expect(foo).to be(1)
-expect(foo).to be(1.0)
-expect(foo).to be(true)
-expect(foo).to be(false)
-expect(foo).to be(:bar)
-expect(foo).to be(nil)
-----
+No documentation
 
 === References
 
@@ -330,36 +164,7 @@ expect(foo).to be(nil)
 | 2.10.0
 |===
 
-Ensures a consistent style is used when matching `nil`.
-
-You can either use the more specific `be_nil` matcher, or the more
-generic `be` matcher with a `nil` argument.
-
-This cop can be configured using the `EnforcedStyle` option
-
-=== Examples
-
-==== `EnforcedStyle: be_nil` (default)
-
-[source,ruby]
-----
-# bad
-expect(foo).to be(nil)
-
-# good
-expect(foo).to be_nil
-----
-
-==== `EnforcedStyle: be`
-
-[source,ruby]
-----
-# bad
-expect(foo).to be_nil
-
-# good
-expect(foo).to be(nil)
-----
+No documentation
 
 === Configurable attributes
 
@@ -387,24 +192,7 @@ expect(foo).to be(nil)
 | 2.23
 |===
 
-Check that before/after(:all/:context) isn't being used.
-
-=== Examples
-
-[source,ruby]
-----
-# bad - Faster but risk of state leaking between examples
-describe MyClass do
-  before(:all) { Widget.create }
-  after(:context) { Widget.delete_all }
-end
-
-# good - Slower but examples are properly isolated
-describe MyClass do
-  before(:each) { Widget.create }
-  after(:each) { Widget.delete_all }
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -433,69 +221,7 @@ end
 | 2.14
 |===
 
-Prefer negated matchers over `to change.by(0)`.
-
-In the case of composite expectations, cop suggest using the
-negation matchers of `RSpec::Matchers#change`.
-
-By default the cop does not support autocorrect of
-compound expectations, but if you set the
-negated matcher for `change`, e.g. `not_change` with
-the `NegatedMatcher` option, the cop will perform the autocorrection.
-
-=== Examples
-
-==== NegatedMatcher: ~ (default)
-
-[source,ruby]
-----
-# bad
-expect { run }.to change(Foo, :bar).by(0)
-expect { run }.to change { Foo.bar }.by(0)
-
-# bad - compound expectations (does not support autocorrection)
-expect { run }
-  .to change(Foo, :bar).by(0)
-  .and change(Foo, :baz).by(0)
-expect { run }
-  .to change { Foo.bar }.by(0)
-  .and change { Foo.baz }.by(0)
-
-# good
-expect { run }.not_to change(Foo, :bar)
-expect { run }.not_to change { Foo.bar }
-
-# good - compound expectations
-define_negated_matcher :not_change, :change
-expect { run }
-  .to not_change(Foo, :bar)
-  .and not_change(Foo, :baz)
-expect { run }
-  .to not_change { Foo.bar }
-  .and not_change { Foo.baz }
-----
-
-==== NegatedMatcher: not_change
-
-[source,ruby]
-----
-# bad (support autocorrection to good case)
-expect { run }
-  .to change(Foo, :bar).by(0)
-  .and change(Foo, :baz).by(0)
-expect { run }
-  .to change { Foo.bar }.by(0)
-  .and change { Foo.baz }.by(0)
-
-# good
-define_negated_matcher :not_change, :change
-expect { run }
-  .to not_change(Foo, :bar)
-  .and not_change(Foo, :baz)
-expect { run }
-  .to not_change { Foo.bar }
-  .and not_change { Foo.baz }
-----
+No documentation
 
 === Configurable attributes
 
@@ -523,35 +249,7 @@ expect { run }
 | -
 |===
 
-Enforces consistent use of `be_a` or `be_kind_of`.
-
-=== Examples
-
-==== EnforcedStyle: be_a (default)
-
-[source,ruby]
-----
-# bad
-expect(object).to be_kind_of(String)
-expect(object).to be_a_kind_of(String)
-
-# good
-expect(object).to be_a(String)
-expect(object).to be_an(String)
-----
-
-==== EnforcedStyle: be_kind_of
-
-[source,ruby]
-----
-# bad
-expect(object).to be_a(String)
-expect(object).to be_an(String)
-
-# good
-expect(object).to be_kind_of(String)
-expect(object).to be_a_kind_of(String)
-----
+No documentation
 
 === Configurable attributes
 
@@ -580,25 +278,7 @@ expect(object).to be_a_kind_of(String)
 | -
 |===
 
-Checks where `contain_exactly` is used.
-
-This cop checks for the following:
-- Prefer `match_array` when matching array values.
-- Prefer `be_empty` when using `contain_exactly` with no arguments.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it { is_expected.to contain_exactly(*array1, *array2) }
-
-# good
-it { is_expected.to match_array(array1 + array2) }
-
-# good
-it { is_expected.to contain_exactly(content, *array) }
-----
+No documentation
 
 === References
 
@@ -616,30 +296,7 @@ it { is_expected.to contain_exactly(content, *array) }
 | -
 |===
 
-`context` should not be used for specifying methods.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-context '#foo_bar' do
-  # ...
-end
-
-context '.foo_bar' do
-  # ...
-end
-
-# good
-describe '#foo_bar' do
-  # ...
-end
-
-describe '.foo_bar' do
-  # ...
-end
-----
+No documentation
 
 === References
 
@@ -658,68 +315,7 @@ end
 | 2.13
 |===
 
-Checks that `context` docstring starts with an allowed prefix.
-
-The default list of prefixes is minimal. Users are encouraged to tailor
-the configuration to meet project needs. Other acceptable prefixes may
-include `if`, `unless`, `for`, `before`, `after`, or `during`.
-They may consist of multiple words if desired.
-
-This cop can be customized allowed context description pattern
-with `AllowedPatterns`. By default, there are no checking by pattern.
-
-=== Examples
-
-==== `Prefixes` configuration
-
-[source,ruby]
-----
-# .rubocop.yml
-# RSpec/ContextWording:
-#   Prefixes:
-#     - when
-#     - with
-#     - without
-#     - if
-#     - unless
-#     - for
-----
-
-[source,ruby]
-----
-# bad
-context 'the display name not present' do
-  # ...
-end
-
-# good
-context 'when the display name is not present' do
-  # ...
-end
-----
-
-==== `AllowedPatterns` configuration
-
-[source,ruby]
-----
-# .rubocop.yml
-# RSpec/ContextWording:
-#   AllowedPatterns:
-#     - とき$
-----
-
-[source,ruby]
-----
-# bad
-context '条件を満たす' do
-  # ...
-end
-
-# good
-context '条件を満たすとき' do
-  # ...
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -739,7 +335,6 @@ end
 
 * https://rspec.rubystyle.guide/#context-descriptions
 * https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ContextWording
-* http://www.betterspecs.org/#contexts
 
 == RSpec/DescribeClass
 
@@ -753,44 +348,7 @@ end
 | 2.7
 |===
 
-Check that the first argument to the top-level describe is a constant.
-
-It can be configured to ignore strings when certain metadata is passed.
-
-Ignores Rails and Aruba `type` metadata by default.
-
-=== Examples
-
-==== `IgnoredMetadata` configuration
-
-[source,ruby]
-----
-# .rubocop.yml
-# RSpec/DescribeClass:
-#   IgnoredMetadata:
-#     type:
-#       - request
-#       - controller
-----
-
-[source,ruby]
-----
-# bad
-describe 'Do something' do
-end
-
-# good
-describe TestedClass do
-  subject { described_class }
-end
-
-describe 'TestedClass::VERSION' do
-  subject { Object.const_get(self.class.description) }
-end
-
-describe "A feature example", type: :feature do
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -822,23 +380,7 @@ end
 | -
 |===
 
-Checks that the second argument to `describe` specifies a method.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe MyClass, 'do something' do
-end
-
-# good
-describe MyClass, '#my_instance_method' do
-end
-
-describe MyClass, '.my_class_method' do
-end
-----
+No documentation
 
 === References
 
@@ -856,27 +398,11 @@ end
 | -
 |===
 
-Avoid describing symbols.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe :my_method do
-  # ...
-end
-
-# good
-describe '#my_method' do
-  # ...
-end
-----
+No documentation
 
 === References
 
 * https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/DescribeSymbol
-* https://github.com/rspec/rspec-core/issues/1610
 
 == RSpec/DescribedClass
 
@@ -890,92 +416,7 @@ end
 | 2.27
 |===
 
-Checks that tests use `described_class`.
-
-If the first argument of describe is a class, the class is exposed to
-each example via described_class.
-
-This cop can be configured using the `EnforcedStyle`, `SkipBlocks`
-and `OnlyStaticConstants` options.
-`OnlyStaticConstants` is only relevant when `EnforcedStyle` is
-`described_class`.
-
-There's a known caveat with rspec-rails's `controller` helper that
-runs its block in a different context, and `described_class` is not
-available to it. `SkipBlocks` option excludes detection in all
-non-RSpec related blocks.
-
-To narrow down this setting to only a specific directory, it is
-possible to use an overriding configuration file local to that
-directory.
-
-=== Examples
-
-==== `EnforcedStyle: described_class` (default)
-
-[source,ruby]
-----
-# bad
-describe MyClass do
-  subject { MyClass.do_something }
-end
-
-# good
-describe MyClass do
-  subject { described_class.do_something }
-end
-----
-
-==== `OnlyStaticConstants: true` (default)
-
-[source,ruby]
-----
-# good
-describe MyClass do
-  subject { MyClass::CONSTANT }
-end
-----
-
-==== `OnlyStaticConstants: false`
-
-[source,ruby]
-----
-# bad
-describe MyClass do
-  subject { MyClass::CONSTANT }
-end
-----
-
-==== `EnforcedStyle: explicit`
-
-[source,ruby]
-----
-# bad
-describe MyClass do
-  subject { described_class.do_something }
-end
-
-# good
-describe MyClass do
-  subject { MyClass.do_something }
-end
-----
-
-==== `SkipBlocks: true`
-
-[source,ruby]
-----
-# spec/controllers/.rubocop.yml
-# RSpec/DescribedClass:
-#   SkipBlocks: true
-
-# acceptable
-describe MyConcern do
-  controller(ApplicationController) do
-    include MyConcern
-  end
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -1011,29 +452,11 @@ end
 | -
 |===
 
-Avoid opening modules and defining specs within them.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-module MyModule
-  RSpec.describe MyClass do
-    # ...
-  end
-end
-
-# good
-RSpec.describe MyModule::MyClass do
-  # ...
-end
-----
+No documentation
 
 === References
 
 * https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/DescribedClassModuleWrapping
-* https://github.com/rubocop/rubocop-rspec/issues/735
 
 == RSpec/Dialect
 
@@ -1047,48 +470,7 @@ end
 | -
 |===
 
-Enforces custom RSpec dialects.
-
-A dialect can be based on the following RSpec methods:
-
-- describe, context, feature, example_group
-- xdescribe, xcontext, xfeature
-- fdescribe, fcontext, ffeature
-- shared_examples, shared_examples_for, shared_context
-- it, specify, example, scenario, its
-- fit, fspecify, fexample, fscenario, focus
-- xit, xspecify, xexample, xscenario, skip
-- pending
-- prepend_before, before, append_before,
-- around
-- prepend_after, after, append_after
-- let, let!
-- subject, subject!
-- expect, is_expected, expect_any_instance_of
-
-By default all of the RSpec methods and aliases are allowed. By setting
-a config like:
-
-  RSpec/Dialect:
-    PreferredMethods:
-      context: describe
-
-You can expect the following behavior:
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-context 'display name presence' do
-  # ...
-end
-
-# good
-describe 'display name presence' do
-  # ...
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -1116,18 +498,7 @@ end
 | -
 |===
 
-Avoid duplicated metadata.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe 'Something', :a, :a
-
-# good
-describe 'Something', :a
-----
+No documentation
 
 === References
 
@@ -1145,43 +516,7 @@ describe 'Something', :a
 | 2.13
 |===
 
-Checks if an example group does not include any tests.
-
-=== Examples
-
-==== usage
-
-[source,ruby]
-----
-# bad
-describe Bacon do
-  let(:bacon)      { Bacon.new(chunkiness) }
-  let(:chunkiness) { false                 }
-
-  context 'extra chunky' do   # flagged by rubocop
-    let(:chunkiness) { true }
-  end
-
-  it 'is chunky' do
-    expect(bacon.chunky?).to be_truthy
-  end
-end
-
-# good
-describe Bacon do
-  let(:bacon)      { Bacon.new(chunkiness) }
-  let(:chunkiness) { false                 }
-
-  it 'is chunky' do
-    expect(bacon.chunky?).to be_truthy
-  end
-end
-
-# good
-describe Bacon do
-  pending 'will add tests later'
-end
-----
+No documentation
 
 === References
 
@@ -1199,29 +534,7 @@ end
 | -
 |===
 
-Checks for empty before and after hooks.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-before {}
-after do; end
-before(:all) do
-end
-after(:all) { }
-
-# good
-before { create_users }
-after do
-  cleanup_users
-end
-before(:all) do
-  create_feed
-end
-after(:all) { cleanup_feed }
-----
+No documentation
 
 === References
 
@@ -1239,50 +552,7 @@ after(:all) { cleanup_feed }
 | -
 |===
 
-Checks if there is an empty line after example blocks.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-RSpec.describe Foo do
-  it 'does this' do
-  end
-  it 'does that' do
-  end
-end
-
-# good
-RSpec.describe Foo do
-  it 'does this' do
-  end
-
-  it 'does that' do
-  end
-end
-
-# fair - it's ok to have non-separated one-liners
-RSpec.describe Foo do
-  it { one }
-  it { two }
-end
-----
-
-==== with AllowConsecutiveOneLiners configuration
-
-[source,ruby]
-----
-# rubocop.yml
-# RSpec/EmptyLineAfterExample:
-#   AllowConsecutiveOneLiners: false
-
-# bad
-RSpec.describe Foo do
-  it { one }
-  it { two }
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -1311,29 +581,7 @@ end
 | -
 |===
 
-Checks if there is an empty line after example group blocks.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-RSpec.describe Foo do
-  describe '#bar' do
-  end
-  describe '#baz' do
-  end
-end
-
-# good
-RSpec.describe Foo do
-  describe '#bar' do
-  end
-
-  describe '#baz' do
-  end
-end
-----
+No documentation
 
 === References
 
@@ -1352,23 +600,7 @@ end
 | -
 |===
 
-Checks if there is an empty line after the last let block.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-let(:foo) { bar }
-let(:something) { other }
-it { does_something }
-
-# good
-let(:foo) { bar }
-let(:something) { other }
-
-it { does_something }
-----
+No documentation
 
 === References
 
@@ -1387,60 +619,7 @@ it { does_something }
 | 2.13
 |===
 
-Checks if there is an empty line after hook blocks.
-
-`AllowConsecutiveOneLiners` configures whether adjacent
-one-line definitions are considered an offense.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-before { do_something }
-it { does_something }
-
-# bad
-after { do_something }
-it { does_something }
-
-# bad
-around { |test| test.run }
-it { does_something }
-
-# good
-after { do_something }
-
-it { does_something }
-
-# fair - it's ok to have non-separated one-liners hooks
-around { |test| test.run }
-after { do_something }
-
-it { does_something }
-----
-
-==== with AllowConsecutiveOneLiners configuration
-
-[source,ruby]
-----
-# rubocop.yml
-# RSpec/EmptyLineAfterHook:
-#   AllowConsecutiveOneLiners: false
-
-# bad
-around { |test| test.run }
-after { do_something }
-
-it { does_something }
-
-# good
-around { |test| test.run }
-
-after { do_something }
-
-it { does_something }
-----
+No documentation
 
 === Configurable attributes
 
@@ -1469,21 +648,7 @@ it { does_something }
 | -
 |===
 
-Checks if there is an empty line after subject block.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-subject(:obj) { described_class }
-let(:foo) { bar }
-
-# good
-subject(:obj) { described_class }
-
-let(:foo) { bar }
-----
+No documentation
 
 === References
 
@@ -1502,20 +667,7 @@ let(:foo) { bar }
 | -
 |===
 
-Avoid empty metadata hash.
-
-=== Examples
-
-==== EnforcedStyle: symbol (default)
-
-[source,ruby]
-----
-# bad
-describe 'Something', {}
-
-# good
-describe 'Something'
-----
+No documentation
 
 === References
 
@@ -1533,18 +685,7 @@ describe 'Something'
 | -
 |===
 
-Use `eq` instead of `be ==` to compare objects.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(foo).to be == 42
-
-# good
-expect(foo).to eq 42
-----
+No documentation
 
 === References
 
@@ -1562,63 +703,7 @@ expect(foo).to eq 42
 | 2.3
 |===
 
-Checks for long examples.
-
-A long example is usually more difficult to understand. Consider
-extracting out some behavior, e.g. with a `let` block, or a helper
-method.
-
-You can set constructs you want to fold with `CountAsOne`.
-Available are: 'array', 'hash', 'heredoc', and 'method_call'.
-Each construct will be counted as one line regardless of
-its actual size.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it do
-  service = described_class.new
-  more_setup
-  more_setup
-  result = service.call
-  expect(result).to be(true)
-end
-
-# good
-it do
-  service = described_class.new
-  result = service.call
-  expect(result).to be(true)
-end
-----
-
-==== CountAsOne: ['array', 'heredoc', 'method_call']
-
-[source,ruby]
-----
-it do
-  array = [         # +1
-    1,
-    2
-  ]
-
-  hash = {          # +3
-    key: 'value'
-  }
-
-  msg = <<~HEREDOC  # +1
-    Heredoc
-    content.
-  HEREDOC
-
-  foo(            # +1
-    1,
-    2
-  )
-end               # 6 points
-----
+No documentation
 
 === Configurable attributes
 
@@ -1650,74 +735,7 @@ end               # 6 points
 | -
 |===
 
-Checks for examples without a description.
-
-RSpec allows for auto-generated example descriptions when there is no
-description provided or the description is an empty one.
-It is acceptable to use `specify` without a description
-
-This cop removes empty descriptions.
-It also defines whether auto-generated description is allowed, based
-on the configured style.
-
-This cop can be configured using the `EnforcedStyle` option
-
-=== Examples
-
-[source,ruby]
-----
-# always good
-specify do
-  result = service.call
-  expect(result).to be(true)
-end
-----
-
-==== `EnforcedStyle: always_allow` (default)
-
-[source,ruby]
-----
-# bad
-it('') { is_expected.to be_good }
-specify '' do
-  result = service.call
-  expect(result).to be(true)
-end
-
-# good
-it { is_expected.to be_good }
-specify do
-  result = service.call
-  expect(result).to be(true)
-end
-----
-
-==== `EnforcedStyle: single_line_only`
-
-[source,ruby]
-----
-# bad
-it('') { is_expected.to be_good }
-it do
-  result = service.call
-  expect(result).to be(true)
-end
-
-# good
-it { is_expected.to be_good }
-----
-
-==== `EnforcedStyle: disallow`
-
-[source,ruby]
-----
-# bad
-it { is_expected.to be_good }
-it do
-  result = service.call
-  expect(result).to be(true)
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -1745,57 +763,7 @@ end
 | 2.13
 |===
 
-Checks for common mistakes in example descriptions.
-
-This cop will correct docstrings that begin with 'should' and 'it'.
-This cop will also look for insufficient examples and call them out.
-
-The autocorrect is experimental - use with care! It can be configured
-with CustomTransform (e.g. have => has) and IgnoredWords (e.g. only).
-
-Use the DisallowedExamples setting to prevent unclear or insufficient
-descriptions. Please note that this config will not be treated as
-case sensitive.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it 'should find nothing' do
-end
-
-it 'will find nothing' do
-end
-
-# good
-it 'finds nothing' do
-end
-----
-
-[source,ruby]
-----
-# bad
-it 'it does things' do
-end
-
-# good
-it 'does things' do
-end
-----
-
-==== `DisallowedExamples: ['works']` (default)
-
-[source,ruby]
-----
-# bad
-it 'works' do
-end
-
-# good
-it 'marks the task as done' do
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -1819,7 +787,6 @@ end
 
 * https://rspec.rubystyle.guide/#should-in-example-docstrings
 * https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ExampleWording
-* http://betterspecs.org/#should
 
 == RSpec/ExcessiveDocstringSpacing
 
@@ -1833,31 +800,7 @@ end
 | -
 |===
 
-Checks for excessive whitespace in example descriptions.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it '  has  excessive   spacing  ' do
-end
-
-# good
-it 'has excessive spacing' do
-end
-----
-
-[source,ruby]
-----
-# bad
-context '  when a condition   is met  ' do
-end
-
-# good
-context 'when a condition is met' do
-end
-----
+No documentation
 
 === References
 
@@ -1875,27 +818,7 @@ end
 | 2.23
 |===
 
-Checks for `expect(...)` calls containing literal values.
-
-Autocorrection is performed when the expected is not a literal.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(5).to eq(price)
-expect(/foo/).to eq(pattern)
-expect("John").to eq(name)
-
-# good
-expect(price).to eq(5)
-expect(pattern).to eq(/foo/)
-expect(name).to eq("John")
-
-# bad (not supported autocorrection)
-expect(false).to eq(true)
-----
+No documentation
 
 === Configurable attributes
 
@@ -1923,41 +846,7 @@ expect(false).to eq(true)
 | 2.5
 |===
 
-Checks for consistent style of change matcher.
-
-Enforces either passing object and attribute as arguments to the matcher
-or passing a block that reads the attribute value.
-
-This cop can be configured using the `EnforcedStyle` option.
-
-=== Examples
-
-==== `EnforcedStyle: method_call` (default)
-
-[source,ruby]
-----
-# bad
-expect { run }.to change { Foo.bar }
-expect { run }.to change { foo.baz }
-
-# good
-expect { run }.to change(Foo, :bar)
-expect { run }.to change(foo, :baz)
-# also good when there are arguments or chained method calls
-expect { run }.to change { Foo.bar(:count) }
-expect { run }.to change { user.reload.name }
-----
-
-==== `EnforcedStyle: block`
-
-[source,ruby]
-----
-# bad
-expect { run }.to change(Foo, :bar)
-
-# good
-expect { run }.to change { Foo.bar }
-----
+No documentation
 
 === Configurable attributes
 
@@ -1985,27 +874,7 @@ expect { run }.to change { Foo.bar }
 | -
 |===
 
-Do not use `expect` in hooks such as `before`.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-before do
-  expect(something).to eq 'foo'
-end
-
-# bad
-after do
-  expect_any_instance_of(Something).to receive(:foo)
-end
-
-# good
-it do
-  expect(something).to eq 'foo'
-end
-----
+No documentation
 
 === References
 
@@ -2023,21 +892,7 @@ end
 | -
 |===
 
-Checks for opportunities to use `expect { ... }.to output`.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-$stdout = StringIO.new
-my_app.print_report
-$stdout = STDOUT
-expect($stdout.string).to eq('Hello World')
-
-# good
-expect { my_app.print_report }.to output('Hello World').to_stdout
-----
+No documentation
 
 === References
 
@@ -2055,76 +910,7 @@ expect { my_app.print_report }.to output('Hello World').to_stdout
 | 2.24
 |===
 
-Checks that spec file paths are consistent and well-formed.
-
-This cop is deprecated.
-We plan to remove it in the next major version update to 3.0.
-The migration targets are `RSpec/SpecFilePathSuffix`
-and `RSpec/SpecFilePathFormat`.
-If you are using this cop, please plan for migration.
-
-By default, this checks that spec file paths are consistent with the
-test subject and enforces that it reflects the described
-class/module and its optionally called out method.
-
-With the configuration option `IgnoreMethods` the called out method will
-be ignored when determining the enforced path.
-
-With the configuration option `CustomTransform` modules or classes can
-be specified that should not as usual be transformed from CamelCase to
-snake_case (e.g. 'RuboCop' => 'rubocop' ).
-
-With the configuration option `SpecSuffixOnly` test files will only
-be checked to ensure they end in '_spec.rb'. This option disables
-checking for consistency in the test subject or test methods.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-whatever_spec.rb         # describe MyClass
-
-# bad
-my_class_spec.rb         # describe MyClass, '#method'
-
-# good
-my_class_spec.rb         # describe MyClass
-
-# good
-my_class_method_spec.rb  # describe MyClass, '#method'
-
-# good
-my_class/method_spec.rb  # describe MyClass, '#method'
-----
-
-==== when configuration is `IgnoreMethods: true`
-
-[source,ruby]
-----
-# bad
-whatever_spec.rb         # describe MyClass
-
-# good
-my_class_spec.rb         # describe MyClass
-
-# good
-my_class_spec.rb         # describe MyClass, '#method'
-----
-
-==== when configuration is `SpecSuffixOnly: true`
-
-[source,ruby]
-----
-# good
-whatever_spec.rb         # describe MyClass
-
-# good
-my_class_spec.rb         # describe MyClass
-
-# good
-my_class_spec.rb         # describe MyClass, '#method'
-----
+No documentation
 
 === Configurable attributes
 
@@ -2164,55 +950,7 @@ my_class_spec.rb         # describe MyClass, '#method'
 | 2.1
 |===
 
-Checks if examples are focused.
-
-This cop does not support autocorrection in some cases.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe MyClass, focus: true do
-end
-
-describe MyClass, :focus do
-end
-
-fdescribe MyClass do
-end
-
-# good
-describe MyClass do
-end
-
-# bad
-fdescribe 'test' do; end
-
-# good
-describe 'test' do; end
-
-# bad
-fdescribe 'test' do; end
-
-# good
-describe 'test' do; end
-
-# bad
-shared_examples 'test', focus: true do; end
-
-# good
-shared_examples 'test' do; end
-
-# bad
-shared_context 'test', focus: true do; end
-
-# good
-shared_context 'test' do; end
-
-# bad (does not support autocorrection)
-focus 'test' do; end
-----
+No documentation
 
 === References
 
@@ -2230,74 +968,7 @@ focus 'test' do; end
 | -
 |===
 
-Checks the arguments passed to `before`, `around`, and `after`.
-
-This cop checks for consistent style when specifying RSpec
-hooks which run for each example. There are three supported
-styles: "implicit", "each", and "example." All styles have
-the same behavior.
-
-=== Examples
-
-==== `EnforcedStyle: implicit` (default)
-
-[source,ruby]
-----
-# bad
-before(:each) do
-  # ...
-end
-
-# bad
-before(:example) do
-  # ...
-end
-
-# good
-before do
-  # ...
-end
-----
-
-==== `EnforcedStyle: each`
-
-[source,ruby]
-----
-# bad
-before(:example) do
-  # ...
-end
-
-# bad
-before do
-  # ...
-end
-
-# good
-before(:each) do
-  # ...
-end
-----
-
-==== `EnforcedStyle: example`
-
-[source,ruby]
-----
-# bad
-before(:each) do
-  # ...
-end
-
-# bad
-before do
-  # ...
-end
-
-# good
-before(:example) do
-  # ...
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -2326,28 +997,7 @@ end
 | -
 |===
 
-Checks for before/around/after hooks that come after an example.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it 'checks what foo does' do
-  expect(foo).to be
-end
-
-before { prepare }
-after { clean_up }
-
-# good
-before { prepare }
-after { clean_up }
-
-it 'checks what foo does' do
-  expect(foo).to be
-end
-----
+No documentation
 
 === References
 
@@ -2365,20 +1015,7 @@ end
 | -
 |===
 
-Checks for equality assertions with identical expressions on both sides.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(foo.bar).to eq(foo.bar)
-expect(foo.bar).to eql(foo.bar)
-
-# good
-expect(foo.bar).to eq(2)
-expect(foo.bar).to eql(2)
-----
+No documentation
 
 === References
 
@@ -2396,23 +1033,7 @@ expect(foo.bar).to eql(2)
 | -
 |===
 
-Check that implicit block expectation syntax is not used.
-
-Prefer using explicit block expectations.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-subject { -> { do_something } }
-it { is_expected.to change(something).to(new_value) }
-
-# good
-it 'changes something to a new value' do
-  expect { do_something }.to change(something).to(new_value)
-end
-----
+No documentation
 
 === References
 
@@ -2431,34 +1052,7 @@ end
 | -
 |===
 
-Check that a consistent implicit expectation style is used.
-
-This cop can be configured using the `EnforcedStyle` option
-and supports the `--auto-gen-config` flag.
-
-=== Examples
-
-==== `EnforcedStyle: is_expected` (default)
-
-[source,ruby]
-----
-# bad
-it { should be_truthy }
-
-# good
-it { is_expected.to be_truthy }
-----
-
-==== `EnforcedStyle: should`
-
-[source,ruby]
-----
-# bad
-it { is_expected.to be_truthy }
-
-# good
-it { should be_truthy }
-----
+No documentation
 
 === Configurable attributes
 
@@ -2487,82 +1081,7 @@ it { should be_truthy }
 | 2.13
 |===
 
-Checks for usage of implicit subject (`is_expected` / `should`).
-
-This cop can be configured using the `EnforcedStyle` option
-
-=== Examples
-
-==== `EnforcedStyle: single_line_only` (default)
-
-[source,ruby]
-----
-# bad
-it do
-  is_expected.to be_truthy
-end
-
-# good
-it { is_expected.to be_truthy }
-it do
-  expect(subject).to be_truthy
-end
-----
-
-==== `EnforcedStyle: single_statement_only`
-
-[source,ruby]
-----
-# bad
-it do
-  foo = 1
-  is_expected.to be_truthy
-end
-
-# good
-it do
-  foo = 1
-  expect(subject).to be_truthy
-end
-it do
-  is_expected.to be_truthy
-end
-----
-
-==== `EnforcedStyle: disallow`
-
-[source,ruby]
-----
-# bad
-it { is_expected.to be_truthy }
-
-# good
-it { expect(subject).to be_truthy }
-----
-
-==== `EnforcedStyle: require_implicit`
-
-[source,ruby]
-----
-# bad
-it { expect(subject).to be_truthy }
-
-# good
-it { is_expected.to be_truthy }
-
-# bad
-it do
-  expect(subject).to be_truthy
-end
-
-# good
-it do
-  is_expected.to be_truthy
-end
-
-# good
-it { expect(named_subject).to be_truthy }
-----
+No documentation
 
 === Configurable attributes
 
@@ -2590,64 +1109,7 @@ it { expect(named_subject).to be_truthy }
 | 2.23
 |===
 
-Do not set up test data using indexes (e.g., `item_1`, `item_2`).
-
-It makes reading the test harder because it's not clear what exactly
-is tested by this particular example.
-
-The configurable options `AllowedIdentifiers` and `AllowedPatterns`
-will also read those set in `Naming/VariableNumber`.
-
-=== Examples
-
-==== `Max: 1 (default)`
-
-[source,ruby]
-----
-# bad
-let(:item_1) { create(:item) }
-let(:item_2) { create(:item) }
-
-let(:item1) { create(:item) }
-let(:item2) { create(:item) }
-
-# good
-
-let(:visible_item) { create(:item, visible: true) }
-let(:invisible_item) { create(:item, visible: false) }
-----
-
-==== `Max: 2`
-
-[source,ruby]
-----
-# bad
-let(:item_1) { create(:item) }
-let(:item_2) { create(:item) }
-let(:item_3) { create(:item) }
-
-# good
-let(:item_1) { create(:item) }
-let(:item_2) { create(:item) }
-----
-
-==== `AllowedIdentifiers: ['item_1', 'item_2']`
-
-[source,ruby]
-----
-# good
-let(:item_1) { create(:item) }
-let(:item_2) { create(:item) }
-----
-
-==== `AllowedPatterns: ['item']`
-
-[source,ruby]
-----
-# good
-let(:item_1) { create(:item) }
-let(:item_2) { create(:item) }
-----
+No documentation
 
 === Configurable attributes
 
@@ -2683,24 +1145,7 @@ let(:item_2) { create(:item) }
 | -
 |===
 
-Checks for `instance_double` used with `have_received`.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it do
-  foo = instance_double(Foo).as_null_object
-  expect(foo).to have_received(:bar)
-end
-
-# good
-it do
-  foo = instance_spy(Foo)
-  expect(foo).to have_received(:bar)
-end
-----
+No documentation
 
 === References
 
@@ -2718,55 +1163,7 @@ end
 | 1.7
 |===
 
-Checks for instance variable usage in specs.
-
-This cop can be configured with the option `AssignmentOnly` which
-will configure the cop to only register offenses on instance
-variable usage if the instance variable is also assigned within
-the spec
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe MyClass do
-  before { @foo = [] }
-  it { expect(@foo).to be_empty }
-end
-
-# good
-describe MyClass do
-  let(:foo) { [] }
-  it { expect(foo).to be_empty }
-end
-----
-
-==== with AssignmentOnly configuration
-
-[source,ruby]
-----
-# rubocop.yml
-# RSpec/InstanceVariable:
-#   AssignmentOnly: false
-
-# bad
-describe MyClass do
-  before { @foo = [] }
-  it { expect(@foo).to be_empty }
-end
-
-# allowed
-describe MyClass do
-  it { expect(@foo).to be_empty }
-end
-
-# good
-describe MyClass do
-  let(:foo) { [] }
-  it { expect(foo).to be_empty }
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -2795,24 +1192,7 @@ end
 | -
 |===
 
-Check for `specify` with `is_expected` and one-liner expectations.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-specify { is_expected.to be_truthy }
-
-# good
-it { is_expected.to be_truthy }
-
-# good
-specify do
-  # ...
-end
-specify { expect(sqrt(4)).to eq(2) }
-----
+No documentation
 
 === References
 
@@ -2831,31 +1211,7 @@ specify { expect(sqrt(4)).to eq(2) }
 | -
 |===
 
-Checks that only one `it_behaves_like` style is used.
-
-=== Examples
-
-==== `EnforcedStyle: it_behaves_like` (default)
-
-[source,ruby]
-----
-# bad
-it_should_behave_like 'a foo'
-
-# good
-it_behaves_like 'a foo'
-----
-
-==== `EnforcedStyle: it_should_behave_like`
-
-[source,ruby]
-----
-# bad
-it_behaves_like 'a foo'
-
-# good
-it_should_behave_like 'a foo'
-----
+No documentation
 
 === Configurable attributes
 
@@ -2883,22 +1239,7 @@ it_should_behave_like 'a foo'
 | -
 |===
 
-Check that `all` matcher is used instead of iterating over an array.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it 'validates users' do
-  [user1, user2, user3].each { |user| expect(user).to be_valid }
-end
-
-# good
-it 'validates users' do
-  expect([user1, user2, user3]).to all(be_valid)
-end
-----
+No documentation
 
 === References
 
@@ -2916,36 +1257,7 @@ end
 | 1.14
 |===
 
-Enforce that subject is the first definition in the test.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-let(:params) { blah }
-subject { described_class.new(params) }
-
-before { do_something }
-subject { described_class.new(params) }
-
-it { expect_something }
-subject { described_class.new(params) }
-it { expect_something_else }
-
-# good
-subject { described_class.new(params) }
-let(:params) { blah }
-
-# good
-subject { described_class.new(params) }
-before { do_something }
-
-# good
-subject { described_class.new(params) }
-it { expect_something }
-it { expect_something_else }
-----
+No documentation
 
 === References
 
@@ -2964,110 +1276,12 @@ it { expect_something_else }
 | -
 |===
 
-Checks that no class, module, or constant is declared.
-
-Constants, including classes and modules, when declared in a block
-scope, are defined in global namespace, and leak between examples.
-
-If several examples may define a `DummyClass`, instead of being a
-blank slate class as it will be in the first example, subsequent
-examples will be reopening it and modifying its behavior in
-unpredictable ways.
-Even worse when a class that exists in the codebase is reopened.
-
-Anonymous classes are fine, since they don't result in global
-namespace name clashes.
-
-=== Examples
-
-==== Constants leak between examples
-
-[source,ruby]
-----
-# bad
-describe SomeClass do
-  OtherClass = Struct.new
-  CONSTANT_HERE = 'I leak into global namespace'
-end
-
-# good
-describe SomeClass do
-  before do
-    stub_const('OtherClass', Struct.new)
-    stub_const('CONSTANT_HERE', 'I only exist during this example')
-  end
-end
-----
-
-[source,ruby]
-----
-# bad
-describe SomeClass do
-  class FooClass < described_class
-    def double_that
-      some_base_method * 2
-    end
-  end
-
-  it { expect(FooClass.new.double_that).to eq(4) }
-end
-
-# good - anonymous class, no constant needs to be defined
-describe SomeClass do
-  let(:foo_class) do
-    Class.new(described_class) do
-      def double_that
-        some_base_method * 2
-      end
-    end
-  end
-
-  it { expect(foo_class.new.double_that).to eq(4) }
-end
-
-# good - constant is stubbed
-describe SomeClass do
-  before do
-    foo_class = Class.new(described_class) do
-                  def do_something
-                  end
-                end
-    stub_const('FooClass', foo_class)
-  end
-
-  it { expect(FooClass.new.double_that).to eq(4) }
-end
-----
-
-[source,ruby]
-----
-# bad
-describe SomeClass do
-  module SomeModule
-    class SomeClass
-      def do_something
-      end
-    end
-  end
-end
-
-# good
-describe SomeClass do
-  before do
-    foo_class = Class.new(described_class) do
-                  def do_something
-                  end
-                end
-    stub_const('SomeModule::SomeClass', foo_class)
-  end
-end
-----
+No documentation
 
 === References
 
 * https://rspec.rubystyle.guide/#declare-constants
 * https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/LeakyConstantDeclaration
-* https://rspec.info/features/3-12/rspec-mocks/mutating-constants
 
 == RSpec/LetBeforeExamples
 
@@ -3081,37 +1295,7 @@ end
 | 1.22
 |===
 
-Checks for `let` definitions that come after an example.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-let(:foo) { bar }
-
-it 'checks what foo does' do
-  expect(foo).to be
-end
-
-let(:some) { other }
-
-it 'checks what some does' do
-  expect(some).to be
-end
-
-# good
-let(:foo) { bar }
-let(:some) { other }
-
-it 'checks what foo does' do
-  expect(foo).to be
-end
-
-it 'checks what some does' do
-  expect(some).to be
-end
-----
+No documentation
 
 === References
 
@@ -3129,32 +1313,7 @@ end
 | -
 |===
 
-Checks unreferenced `let!` calls being used for test setup.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-let!(:my_widget) { create(:widget) }
-
-it 'counts widgets' do
-  expect(Widget.count).to eq(1)
-end
-
-# good
-it 'counts widgets' do
-  create(:widget)
-  expect(Widget.count).to eq(1)
-end
-
-# good
-before { create(:widget) }
-
-it 'counts widgets' do
-  expect(Widget.count).to eq(1)
-end
-----
+No documentation
 
 === References
 
@@ -3172,28 +1331,7 @@ end
 | -
 |===
 
-Checks where `match_array` is used.
-
-This cop checks for the following:
-- Prefer `contain_exactly` when matching an array with values.
-- Prefer `eq` when using `match_array` with an empty array literal.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it { is_expected.to match_array([content1, content2]) }
-
-# good
-it { is_expected.to contain_exactly(content1, content2) }
-
-# good
-it { is_expected.to match_array([content] + array) }
-
-# good
-it { is_expected.to match_array(%w(tremble in fear foolish mortals)) }
-----
+No documentation
 
 === References
 
@@ -3211,19 +1349,7 @@ it { is_expected.to match_array(%w(tremble in fear foolish mortals)) }
 | -
 |===
 
-Check that chains of messages are not being stubbed.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-allow(foo).to receive_message_chain(:bar, :baz).and_return(42)
-
-# good
-thing = Thing.new(baz: 42)
-allow(foo).to receive(:bar).and_return(thing)
-----
+No documentation
 
 === References
 
@@ -3241,34 +1367,7 @@ allow(foo).to receive(:bar).and_return(thing)
 | 1.8
 |===
 
-Checks for consistent message expectation style.
-
-This cop can be configured in your configuration using the
-`EnforcedStyle` option and supports `--auto-gen-config`.
-
-=== Examples
-
-==== `EnforcedStyle: allow` (default)
-
-[source,ruby]
-----
-# bad
-expect(foo).to receive(:bar)
-
-# good
-allow(foo).to receive(:bar)
-----
-
-==== `EnforcedStyle: expect`
-
-[source,ruby]
-----
-# bad
-allow(foo).to receive(:bar)
-
-# good
-expect(foo).to receive(:bar)
-----
+No documentation
 
 === Configurable attributes
 
@@ -3296,40 +1395,7 @@ expect(foo).to receive(:bar)
 | -
 |===
 
-Checks that message expectations are set using spies.
-
-This cop can be configured in your configuration using the
-`EnforcedStyle` option and supports `--auto-gen-config`.
-
-=== Examples
-
-==== `EnforcedStyle: have_received` (default)
-
-[source,ruby]
-----
-# bad
-expect(foo).to receive(:bar)
-do_something
-
-# good
-allow(foo).to receive(:bar) # or use instance_spy
-do_something
-expect(foo).to have_received(:bar)
-----
-
-==== `EnforcedStyle: receive`
-
-[source,ruby]
-----
-# bad
-allow(foo).to receive(:bar)
-do_something
-expect(foo).to have_received(:bar)
-
-# good
-expect(foo).to receive(:bar)
-do_something
-----
+No documentation
 
 === Configurable attributes
 
@@ -3357,35 +1423,7 @@ do_something
 | -
 |===
 
-Use consistent metadata style.
-
-This cop does not support autocorrection in the case of
-`EnforcedStyle: hash` where the trailing metadata type is ambiguous.
-(e.g. `describe 'Something', :a, b`)
-
-=== Examples
-
-==== EnforcedStyle: symbol (default)
-
-[source,ruby]
-----
-# bad
-describe 'Something', a: true
-
-# good
-describe 'Something', :a
-----
-
-==== EnforcedStyle: hash
-
-[source,ruby]
-----
-# bad
-describe 'Something', :a
-
-# good
-describe 'Something', a: true
-----
+No documentation
 
 === Configurable attributes
 
@@ -3413,26 +1451,7 @@ describe 'Something', a: true
 | -
 |===
 
-Checks that the first argument to an example group is not empty.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe do
-end
-
-RSpec.describe do
-end
-
-# good
-describe TestedClass do
-end
-
-describe "A feature example" do
-end
-----
+No documentation
 
 === References
 
@@ -3450,29 +1469,7 @@ end
 | -
 |===
 
-Checks for multiple top-level example groups.
-
-Multiple descriptions for the same class or module should either
-be nested or separated into different test files.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe MyClass, '.do_something' do
-end
-describe MyClass, '.do_something_else' do
-end
-
-# good
-describe MyClass do
-  describe '.do_something' do
-  end
-  describe '.do_something_else' do
-  end
-end
-----
+No documentation
 
 === References
 
@@ -3490,86 +1487,7 @@ end
 | 1.21
 |===
 
-Checks if examples contain too many `expect` calls.
-
-This cop is configurable using the `Max` option
-and works with `--auto-gen-config`.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe UserCreator do
-  it 'builds a user' do
-    expect(user.name).to eq("John")
-    expect(user.age).to eq(22)
-  end
-end
-
-# good
-describe UserCreator do
-  it 'sets the users name' do
-    expect(user.name).to eq("John")
-  end
-
-  it 'sets the users age' do
-    expect(user.age).to eq(22)
-  end
-end
-----
-
-==== `aggregate_failures: true` (default)
-
-[source,ruby]
-----
-# good - the cop ignores when RSpec aggregates failures
- describe UserCreator do
-   it 'builds a user', :aggregate_failures do
-     expect(user.name).to eq("John")
-     expect(user.age).to eq(22)
-   end
- end
-----
-
-==== `aggregate_failures: false`
-
-[source,ruby]
-----
-# Detected as an offense
- describe UserCreator do
-   it 'builds a user', aggregate_failures: false do
-     expect(user.name).to eq("John")
-     expect(user.age).to eq(22)
-   end
- end
-----
-
-==== `Max: 1` (default)
-
-[source,ruby]
-----
-# bad
-describe UserCreator do
-  it 'builds a user' do
-    expect(user.name).to eq("John")
-    expect(user.age).to eq(22)
-  end
-end
-----
-
-==== `Max: 2`
-
-[source,ruby]
-----
-# good
-describe UserCreator do
-  it 'builds a user' do
-    expect(user.name).to eq("John")
-    expect(user.age).to eq(22)
-  end
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -3585,7 +1503,6 @@ end
 
 * https://rspec.rubystyle.guide/#expectation-per-example
 * https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/MultipleExpectations
-* http://betterspecs.org/#single
 
 == RSpec/MultipleMemoizedHelpers
 
@@ -3599,95 +1516,7 @@ end
 | -
 |===
 
-Checks if example groups contain too many `let` and `subject` calls.
-
-This cop is configurable using the `Max` option and the `AllowSubject`
-which will configure the cop to only register offenses on calls to
-`let` and not calls to `subject`.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe MyClass do
-  let(:foo) { [] }
-  let(:bar) { [] }
-  let!(:baz) { [] }
-  let(:qux) { [] }
-  let(:quux) { [] }
-  let(:quuz) { {} }
-end
-
-describe MyClass do
-  let(:foo) { [] }
-  let(:bar) { [] }
-  let!(:baz) { [] }
-
-  context 'when stuff' do
-    let(:qux) { [] }
-    let(:quux) { [] }
-    let(:quuz) { {} }
-  end
-end
-
-# good
-describe MyClass do
-  let(:bar) { [] }
-  let!(:baz) { [] }
-  let(:qux) { [] }
-  let(:quux) { [] }
-  let(:quuz) { {} }
-end
-
-describe MyClass do
-  context 'when stuff' do
-    let(:foo) { [] }
-    let(:bar) { [] }
-    let!(:booger) { [] }
-  end
-
-  context 'when other stuff' do
-    let(:qux) { [] }
-    let(:quux) { [] }
-    let(:quuz) { {} }
-  end
-end
-----
-
-==== when disabling AllowSubject configuration
-
-[source,ruby]
-----
-# rubocop.yml
-# RSpec/MultipleMemoizedHelpers:
-#   AllowSubject: false
-
-# bad - `subject` counts towards memoized helpers
-describe MyClass do
-  subject { {} }
-  let(:foo) { [] }
-  let(:bar) { [] }
-  let!(:baz) { [] }
-  let(:qux) { [] }
-  let(:quux) { [] }
-end
-----
-
-==== with Max configuration
-
-[source,ruby]
-----
-# rubocop.yml
-# RSpec/MultipleMemoizedHelpers:
-#   Max: 1
-
-# bad
-describe MyClass do
-  let(:foo) { [] }
-  let(:bar) { [] }
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -3720,54 +1549,7 @@ end
 | -
 |===
 
-Checks if an example group defines `subject` multiple times.
-
-This cop does not support autocorrection in some cases.
-The autocorrect behavior for this cop depends on the type of
-duplication:
-
-  - If multiple named subjects are defined then this probably indicates
-    that the overwritten subjects (all subjects except the last
-    definition) are effectively being used to define helpers. In this
-    case they are replaced with `let`.
-
-  - If multiple unnamed subjects are defined though then this can *only*
-    be dead code and we remove the overwritten subject definitions.
-
-  - If subjects are defined with `subject!` then we don't autocorrect.
-    This is enough of an edge case that people can just move this to
-    a `before` hook on their own
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe Foo do
-  subject(:user) { User.new }
-  subject(:post) { Post.new }
-end
-
-# good
-describe Foo do
-  let(:user) { User.new }
-  subject(:post) { Post.new }
-end
-
-# bad (does not support autocorrection)
-describe Foo do
-  subject!(:user) { User.new }
-  subject!(:post) { Post.new }
-end
-
-# good
-describe Foo do
-  before do
-    User.new
-    Post.new
-  end
-end
-----
+No documentation
 
 === References
 
@@ -3785,89 +1567,7 @@ end
 | 2.15
 |===
 
-Checks for explicitly referenced test subjects.
-
-RSpec lets you declare an "implicit subject" using `subject { ... }`
-which allows for tests like `it { is_expected.to be_valid }`.
-If you need to reference your test subject you should explicitly
-name it using `subject(:your_subject_name) { ... }`. Your test subjects
-should be the most important object in your tests so they deserve
-a descriptive name.
-
-This cop can be configured in your configuration using `EnforcedStyle`,
-and `IgnoreSharedExamples` which will not report offenses for implicit
-subjects in shared example groups.
-
-=== Examples
-
-==== `EnforcedStyle: always` (default)
-
-[source,ruby]
-----
-# bad
-RSpec.describe User do
-  subject { described_class.new }
-
-  it 'is valid' do
-    expect(subject.valid?).to be(true)
-  end
-end
-
-# good
-RSpec.describe User do
-  subject(:user) { described_class.new }
-
-  it 'is valid' do
-    expect(user.valid?).to be(true)
-  end
-end
-
-# also good
-RSpec.describe User do
-  subject(:user) { described_class.new }
-
-  it { is_expected.to be_valid }
-end
-----
-
-==== `EnforcedStyle: named_only`
-
-[source,ruby]
-----
-# bad
-RSpec.describe User do
-  subject(:user) { described_class.new }
-
-  it 'is valid' do
-    expect(subject.valid?).to be(true)
-  end
-end
-
-# good
-RSpec.describe User do
-  subject(:user) { described_class.new }
-
-  it 'is valid' do
-    expect(user.valid?).to be(true)
-  end
-end
-
-# also good
-RSpec.describe User do
-  subject { described_class.new }
-
-  it { is_expected.to be_valid }
-end
-
-# acceptable
-RSpec.describe User do
-  subject { described_class.new }
-
-  it 'is valid' do
-    expect(subject.valid?).to be(true)
-  end
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -3900,113 +1600,7 @@ end
 | 2.13
 |===
 
-Checks for nested example groups.
-
-This cop is configurable using the `Max` option
-and supports `--auto-gen-config`.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-context 'when using some feature' do
-  let(:some)    { :various }
-  let(:feature) { :setup   }
-
-  context 'when user is signed in' do  # flagged by rubocop
-    let(:user) do
-      UserCreate.call(user_attributes)
-    end
-
-    let(:user_attributes) do
-      {
-        name: 'John',
-        age:  22,
-        role: role
-      }
-    end
-
-    context 'when user is an admin' do # flagged by rubocop
-      let(:role) { 'admin' }
-
-      it 'blah blah'
-      it 'yada yada'
-    end
-  end
-end
-
-# good
-context 'using some feature as an admin' do
-  let(:some)    { :various }
-  let(:feature) { :setup   }
-
-  let(:user) do
-    UserCreate.call(
-      name: 'John',
-      age:  22,
-      role: 'admin'
-    )
-  end
-
-  it 'blah blah'
-  it 'yada yada'
-end
-----
-
-==== `Max: 3` (default)
-
-[source,ruby]
-----
-# bad
-describe Foo do
-  context 'foo' do
-    context 'bar' do
-      context 'baz' do # flagged by rubocop
-      end
-    end
-  end
-end
-----
-
-==== `Max: 2`
-
-[source,ruby]
-----
-# bad
-describe Foo do
-  context 'foo' do
-    context 'bar' do # flagged by rubocop
-      context 'baz' do # flagged by rubocop
-      end
-    end
-  end
-end
-----
-
-==== `AllowedGroups: [] (default)`
-
-[source,ruby]
-----
-describe Foo do # <-- nested groups 1
-  context 'foo' do # <-- nested groups 2
-    context 'bar' do # <-- nested groups 3
-    end
-  end
-end
-----
-
-==== `AllowedGroups: [path]`
-
-[source,ruby]
-----
-describe Foo do # <-- nested groups 1
-  path '/foo' do # <-- nested groups 1 (not counted)
-    context 'bar' do # <-- nested groups 2
-    end
-  end
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -4038,66 +1632,7 @@ end
 | 2.14
 |===
 
-Checks if an example contains any expectation.
-
-All RSpec's example and expectation methods are covered by default.
-If you are using your own custom methods,
-add the following configuration:
-
-  RSpec:
-    Language:
-      Examples:
-        Regular:
-          - custom_it
-      Expectations:
-        - custom_expect
-
-This cop can be customized with an allowed expectation methods pattern
-with an `AllowedPatterns` option. ^expect_ and ^assert_ are allowed
-by default.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it do
-  a?
-end
-
-# good
-it do
-  expect(a?).to be(true)
-end
-----
-
-==== `AllowedPatterns` configuration
-
-[source,ruby]
-----
-# .rubocop.yml
-# RSpec/NoExpectationExample:
-#   AllowedPatterns:
-#     - ^expect_
-#     - ^assert_
-----
-
-[source,ruby]
-----
-# bad
-it do
-  not_expect_something
-end
-
-# good
-it do
-  expect_something
-end
-
-it do
-  assert_something
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -4125,39 +1660,7 @@ end
 | -
 |===
 
-Checks for consistent method usage for negating expectations.
-
-=== Examples
-
-==== `EnforcedStyle: not_to` (default)
-
-[source,ruby]
-----
-# bad
-it '...' do
-  expect(false).to_not be_true
-end
-
-# good
-it '...' do
-  expect(false).not_to be_true
-end
-----
-
-==== `EnforcedStyle: to_not`
-
-[source,ruby]
-----
-# bad
-it '...' do
-  expect(false).not_to be_true
-end
-
-# good
-it '...' do
-  expect(false).to_not be_true
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -4185,28 +1688,7 @@ end
 | -
 |===
 
-Checks if there is a let/subject that overwrites an existing one.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-let(:foo) { bar }
-let(:foo) { baz }
-
-subject(:foo) { bar }
-let(:foo) { baz }
-
-let(:foo) { bar }
-let!(:foo) { baz }
-
-# good
-subject(:test) { something }
-let(:foo) { bar }
-let(:baz) { baz }
-let!(:other) { other }
-----
+No documentation
 
 === References
 
@@ -4224,38 +1706,7 @@ let!(:other) { other }
 | -
 |===
 
-Checks for any pending or skipped examples.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe MyClass do
-  it "should be true"
-end
-
-describe MyClass do
-  it "should be true", skip: true do
-    expect(1).to eq(2)
-  end
-end
-
-describe MyClass do
-  it "should be true" do
-    pending
-  end
-end
-
-describe MyClass do
-  xit "should be true" do
-  end
-end
-
-# good
-describe MyClass do
-end
-----
+No documentation
 
 === References
 
@@ -4273,63 +1724,7 @@ end
 | -
 |===
 
-Checks for pending or skipped examples without reason.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-pending 'does something' do
-end
-
-# bad
-it 'does something', :pending do
-end
-
-# bad
-it 'does something' do
-  pending
-end
-
-# bad
-xdescribe 'something' do
-end
-
-# bad
-skip 'does something' do
-end
-
-# bad
-it 'does something', :skip do
-end
-
-# bad
-it 'does something' do
-  skip
-end
-
-# bad
-it 'does something'
-
-# good
-it 'does something' do
-  pending 'reason'
-end
-
-# good
-it 'does something' do
-  skip 'reason'
-end
-
-# good
-it 'does something', pending: 'reason' do
-end
-
-# good
-it 'does something', skip: 'reason' do
-end
-----
+No documentation
 
 === References
 
@@ -4347,72 +1742,7 @@ end
 | -
 |===
 
-Prefer using predicate matcher over using predicate method directly.
-
-RSpec defines magic matchers for predicate methods.
-This cop recommends to use the predicate matcher instead of using
-predicate method directly.
-
-=== Examples
-
-==== Strict: true, EnforcedStyle: inflected (default)
-
-[source,ruby]
-----
-# bad
-expect(foo.something?).to be_truthy
-
-# good
-expect(foo).to be_something
-
-# also good - It checks "true" strictly.
-expect(foo.something?).to be(true)
-----
-
-==== Strict: false, EnforcedStyle: inflected
-
-[source,ruby]
-----
-# bad
-expect(foo.something?).to be_truthy
-expect(foo.something?).to be(true)
-
-# good
-expect(foo).to be_something
-----
-
-==== Strict: true, EnforcedStyle: explicit
-
-[source,ruby]
-----
-# bad
-expect(foo).to be_something
-
-# good - the above code is rewritten to it by this cop
-expect(foo.something?).to be(true)
-
-# bad - no autocorrect
-expect(foo)
-  .to be_something(<<~TEXT)
-    bar
-  TEXT
-
-# good
-expect(foo.something?(<<~TEXT)).to be(true)
-  bar
-TEXT
-----
-
-==== Strict: false, EnforcedStyle: explicit
-
-[source,ruby]
-----
-# bad
-expect(foo).to be_something
-
-# good - the above code is rewritten to it by this cop
-expect(foo.something?).to be_truthy
-----
+No documentation
 
 === Configurable attributes
 
@@ -4449,28 +1779,7 @@ expect(foo.something?).to be_truthy
 | -
 |===
 
-Check for `once` and `twice` receive counts matchers usage.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(foo).to receive(:bar).exactly(1).times
-expect(foo).to receive(:bar).exactly(2).times
-expect(foo).to receive(:bar).at_least(1).times
-expect(foo).to receive(:bar).at_least(2).times
-expect(foo).to receive(:bar).at_most(1).times
-expect(foo).to receive(:bar).at_most(2).times
-
-# good
-expect(foo).to receive(:bar).once
-expect(foo).to receive(:bar).twice
-expect(foo).to receive(:bar).at_least(:once)
-expect(foo).to receive(:bar).at_least(:twice)
-expect(foo).to receive(:bar).at_most(:once)
-expect(foo).to receive(:bar).at_most(:twice).times
-----
+No documentation
 
 === References
 
@@ -4488,35 +1797,7 @@ expect(foo).to receive(:bar).at_most(:twice).times
 | -
 |===
 
-Checks for multiple messages stubbed on the same object.
-
-=== Safety
-
-The autocorrection is marked as unsafe, because it may change the
-order of stubs. This in turn may cause e.g. variables to be called
-before they are defined.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-before do
-  allow(Service).to receive(:foo).and_return(bar)
-  allow(Service).to receive(:baz).and_return(qux)
-end
-
-# good
-before do
-  allow(Service).to receive_messages(foo: bar, baz: qux)
-end
-
-# good - ignore same message
-before do
-  allow(Service).to receive(:foo).and_return(bar)
-  allow(Service).to receive(:foo).and_return(qux)
-end
-----
+No documentation
 
 === References
 
@@ -4534,18 +1815,7 @@ end
 | -
 |===
 
-Prefer `not_to receive(...)` over `receive(...).never`.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(foo).to receive(:bar).never
-
-# good
-expect(foo).not_to receive(:bar)
-----
+No documentation
 
 === References
 
@@ -4563,19 +1833,7 @@ expect(foo).not_to receive(:bar)
 | -
 |===
 
-Remove redundant `around` hook.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-around do |example|
-  example.run
-end
-
-# good
-----
+No documentation
 
 === References
 
@@ -4593,22 +1851,7 @@ end
 | -
 |===
 
-Checks for redundant predicate matcher.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(foo).to be_exist(bar)
-expect(foo).not_to be_include(bar)
-expect(foo).to be_all(bar)
-
-# good
-expect(foo).to exist(bar)
-expect(foo).not_to include(bar)
-expect(foo).to all be(bar)
-----
+No documentation
 
 === References
 
@@ -4626,21 +1869,7 @@ expect(foo).to all be(bar)
 | -
 |===
 
-Checks that `remove_const` is not used in specs.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it 'does something' do
-  Object.send(:remove_const, :SomeConstant)
-end
-
-before do
-  SomeClass.send(:remove_const, :SomeConstant)
-end
-----
+No documentation
 
 === References
 
@@ -4658,45 +1887,7 @@ end
 | -
 |===
 
-Check for repeated description strings in example groups.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-RSpec.describe User do
-  it 'is valid' do
-    # ...
-  end
-
-  it 'is valid' do
-    # ...
-  end
-end
-
-# good
-RSpec.describe User do
-  it 'is valid when first and last name are present' do
-    # ...
-  end
-
-  it 'is valid when last name only is present' do
-    # ...
-  end
-end
-
-# good
-RSpec.describe User do
-  it 'is valid' do
-    # ...
-  end
-
-  it 'is valid', :flag do
-    # ...
-  end
-end
-----
+No documentation
 
 === References
 
@@ -4714,20 +1905,7 @@ end
 | -
 |===
 
-Check for repeated examples within example groups.
-
-=== Examples
-
-[source,ruby]
-----
-it 'is valid' do
-  expect(user).to be_valid
-end
-
-it 'validates the user' do
-  expect(user).to be_valid
-end
-----
+No documentation
 
 === References
 
@@ -4745,48 +1923,7 @@ end
 | -
 |===
 
-Check for repeated describe and context block body.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe 'cool feature x' do
-  it { cool_predicate }
-end
-
-describe 'cool feature y' do
-  it { cool_predicate }
-end
-
-# good
-describe 'cool feature' do
-  it { cool_predicate }
-end
-
-describe 'another cool feature' do
-  it { another_predicate }
-end
-
-# good
-context 'when case x', :tag do
-  it { cool_predicate }
-end
-
-context 'when case y' do
-  it { cool_predicate }
-end
-
-# good
-context Array do
-  it { is_expected.to respond_to :each }
-end
-
-context Hash do
-  it { is_expected.to respond_to :each }
-end
-----
+No documentation
 
 === References
 
@@ -4804,48 +1941,7 @@ end
 | -
 |===
 
-Check for repeated example group descriptions.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe 'cool feature' do
-  # example group
-end
-
-describe 'cool feature' do
-  # example group
-end
-
-# bad
-context 'when case x' do
-  # example group
-end
-
-describe 'when case x' do
-  # example group
-end
-
-# good
-describe 'cool feature' do
-  # example group
-end
-
-describe 'another cool feature' do
-  # example group
-end
-
-# good
-context 'when case x' do
-  # example group
-end
-
-context 'when another case' do
-  # example group
-end
-----
+No documentation
 
 === References
 
@@ -4863,51 +1959,7 @@ end
 | -
 |===
 
-Check for repeated include of shared examples.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe 'foo' do
-  include_examples 'cool stuff'
-  include_examples 'cool stuff'
-end
-
-# bad
-describe 'foo' do
-  it_behaves_like 'a cool', 'thing'
-  it_behaves_like 'a cool', 'thing'
-end
-
-# bad
-context 'foo' do
-  it_should_behave_like 'a duck'
-  it_should_behave_like 'a duck'
-end
-
-# good
-describe 'foo' do
-  include_examples 'cool stuff'
-end
-
-describe 'bar' do
-  include_examples 'cool stuff'
-end
-
-# good
-describe 'foo' do
-  it_behaves_like 'a cool', 'thing'
-  it_behaves_like 'a cool', 'person'
-end
-
-# good
-context 'foo' do
-  it_should_behave_like 'a duck'
-  it_should_behave_like 'a goose'
-end
-----
+No documentation
 
 === References
 
@@ -4925,35 +1977,7 @@ end
 | -
 |===
 
-Checks for repeated calls to subject missing that it is memoized.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it do
-  subject
-  expect { subject }.to not_change { A.count }
-end
-
-it do
-  expect { subject }.to change { A.count }
-  expect { subject }.to not_change { A.count }
-end
-
-# good
-it do
-  expect { my_method }.to change { A.count }
-  expect { my_method }.to not_change { A.count }
-end
-
-# also good
-it do
-  expect { subject.a }.to change { A.count }
-  expect { subject.b }.to not_change { A.count }
-end
-----
+No documentation
 
 === References
 
@@ -4971,45 +1995,7 @@ end
 | 1.22
 |===
 
-Checks for consistent style of stub's return setting.
-
-Enforces either `and_return` or block-style return in the cases
-where the returned value is constant. Ignores dynamic returned values
-are the result would be different
-
-This cop can be configured using the `EnforcedStyle` option
-
-=== Examples
-
-==== `EnforcedStyle: and_return` (default)
-
-[source,ruby]
-----
-# bad
-allow(Foo).to receive(:bar) { "baz" }
-expect(Foo).to receive(:bar) { "baz" }
-
-# good
-allow(Foo).to receive(:bar).and_return("baz")
-expect(Foo).to receive(:bar).and_return("baz")
-# also good as the returned value is dynamic
-allow(Foo).to receive(:bar) { bar.baz }
-----
-
-==== `EnforcedStyle: block`
-
-[source,ruby]
-----
-# bad
-allow(Foo).to receive(:bar).and_return("baz")
-expect(Foo).to receive(:bar).and_return("baz")
-
-# good
-allow(Foo).to receive(:bar) { "baz" }
-expect(Foo).to receive(:bar) { "baz" }
-# also good as the returned value is dynamic
-allow(Foo).to receive(:bar).and_return(bar.baz)
-----
+No documentation
 
 === Configurable attributes
 
@@ -5037,32 +2023,7 @@ allow(Foo).to receive(:bar).and_return(bar.baz)
 | 1.39
 |===
 
-Checks for let scattered across the example group.
-
-Group lets together
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe Foo do
-  let(:foo) { 1 }
-  subject { Foo }
-  let(:bar) { 2 }
-  before { prepare }
-  let!(:baz) { 3 }
-end
-
-# good
-describe Foo do
-  subject { Foo }
-  before { prepare }
-  let(:foo) { 1 }
-  let(:bar) { 2 }
-  let!(:baz) { 3 }
-end
-----
+No documentation
 
 === References
 
@@ -5080,28 +2041,7 @@ end
 | -
 |===
 
-Checks for setup scattered across multiple hooks in an example group.
-
-Unify `before`, `after`, and `around` hooks when possible.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe Foo do
-  before { setup1 }
-  before { setup2 }
-end
-
-# good
-describe Foo do
-  before do
-    setup1
-    setup2
-  end
-end
-----
+No documentation
 
 === References
 
@@ -5119,58 +2059,7 @@ end
 | -
 |===
 
-Checks for proper shared_context and shared_examples usage.
-
-If there are no examples defined, use shared_context.
-If there is no setup defined, use shared_examples.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-RSpec.shared_context 'only examples here' do
-  it 'does x' do
-  end
-
-  it 'does y' do
-  end
-end
-
-# good
-RSpec.shared_examples 'only examples here' do
-  it 'does x' do
-  end
-
-  it 'does y' do
-  end
-end
-----
-
-[source,ruby]
-----
-# bad
-RSpec.shared_examples 'only setup here' do
-  subject(:foo) { :bar }
-
-  let(:baz) { :bazz }
-
-  before do
-    something
-  end
-end
-
-# good
-RSpec.shared_context 'only setup here' do
-  subject(:foo) { :bar }
-
-  let(:baz) { :bazz }
-
-  before do
-    something
-  end
-end
-----
+No documentation
 
 === References
 
@@ -5188,51 +2077,7 @@ end
 | 2.26
 |===
 
-Checks for consistent style for shared example names.
-
-Enforces either `string` or `symbol` for shared example names.
-
-This cop can be configured using the `EnforcedStyle` option
-
-=== Examples
-
-==== `EnforcedStyle: string` (default)
-
-[source,ruby]
-----
-# bad
-it_behaves_like :foo_bar_baz
-it_should_behave_like :foo_bar_baz
-shared_examples :foo_bar_baz
-shared_examples_for :foo_bar_baz
-include_examples :foo_bar_baz
-
-# good
-it_behaves_like 'foo bar baz'
-it_should_behave_like 'foo bar baz'
-shared_examples 'foo bar baz'
-shared_examples_for 'foo bar baz'
-include_examples 'foo bar baz'
-----
-
-==== `EnforcedStyle: symbol`
-
-[source,ruby]
-----
-# bad
-it_behaves_like 'foo bar baz'
-it_should_behave_like 'foo bar baz'
-shared_examples 'foo bar baz'
-shared_examples_for 'foo bar baz'
-include_examples 'foo bar baz'
-
-# good
-it_behaves_like :foo_bar_baz
-it_should_behave_like :foo_bar_baz
-shared_examples :foo_bar_baz
-shared_examples_for :foo_bar_baz
-include_examples :foo_bar_baz
-----
+No documentation
 
 === Configurable attributes
 
@@ -5260,22 +2105,7 @@ include_examples :foo_bar_baz
 | 1.10
 |===
 
-Checks that chains of messages contain more than one element.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-allow(foo).to receive_message_chain(:bar).and_return(42)
-
-# good
-allow(foo).to receive(:bar).and_return(42)
-
-# also good
-allow(foo).to receive(:bar, :baz)
-allow(foo).to receive("bar.baz")
-----
+No documentation
 
 === References
 
@@ -5293,29 +2123,7 @@ allow(foo).to receive("bar.baz")
 | -
 |===
 
-Checks for passing a block to `skip` within examples.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-it 'does something' do
-  skip 'not yet implemented' do
-    do_something
-  end
-end
-
-# good
-it 'does something' do
-  skip 'not yet implemented'
-  do_something
-end
-
-# good - when outside example
-skip 'not yet implemented' do
-end
-----
+No documentation
 
 === References
 
@@ -5333,22 +2141,7 @@ end
 | -
 |===
 
-Sort RSpec metadata alphabetically.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe 'Something', :b, :a
-context 'Something', foo: 'bar', baz: true
-it 'works', :b, :a, foo: 'bar', baz: true
-
-# good
-describe 'Something', :a, :b
-context 'Something', baz: true, foo: 'bar'
-it 'works', :a, :b, baz: true, foo: 'bar'
-----
+No documentation
 
 === References
 
@@ -5366,54 +2159,7 @@ it 'works', :a, :b, baz: true, foo: 'bar'
 | -
 |===
 
-Checks that spec file paths are consistent and well-formed.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-whatever_spec.rb         # describe MyClass
-my_class_spec.rb         # describe MyClass, '#method'
-
-# good
-my_class_spec.rb         # describe MyClass
-my_class_method_spec.rb  # describe MyClass, '#method'
-my_class/method_spec.rb  # describe MyClass, '#method'
-----
-
-==== `CustomTransform: {RuboCop=>rubocop, RSpec=>rspec}` (default)
-
-[source,ruby]
-----
-# good
-rubocop_spec.rb          # describe RuboCop
-rspec_spec.rb            # describe RSpec
-----
-
-==== `IgnoreMethods: false` (default)
-
-[source,ruby]
-----
-# bad
-my_class_spec.rb         # describe MyClass, '#method'
-----
-
-==== `IgnoreMethods: true`
-
-[source,ruby]
-----
-# good
-my_class_spec.rb         # describe MyClass, '#method'
-----
-
-==== `IgnoreMetadata: {type=>routing}` (default)
-
-[source,ruby]
-----
-# good
-whatever_spec.rb         # describe MyClass, type: :routing do; end
-----
+No documentation
 
 === Configurable attributes
 
@@ -5457,23 +2203,7 @@ whatever_spec.rb         # describe MyClass, type: :routing do; end
 | -
 |===
 
-Checks that spec file paths suffix are consistent and well-formed.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-my_class/foo_specorb.rb   # describe MyClass
-spec/models/user.rb       # describe User
-spec/models/user_specxrb  # describe User
-
-# good
-my_class_spec.rb          # describe MyClass
-
-# good - shared examples are allowed
-spec/models/user.rb       # shared_examples_for 'foo'
-----
+No documentation
 
 === Configurable attributes
 
@@ -5501,19 +2231,7 @@ spec/models/user.rb       # shared_examples_for 'foo'
 | -
 |===
 
-Checks that message expectations do not have a configured response.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(foo).to receive(:bar).with(42).and_return("hello world")
-
-# good (without spies)
-allow(foo).to receive(:bar).with(42).and_return("hello world")
-expect(foo).to receive(:bar).with(42)
-----
+No documentation
 
 === References
 
@@ -5531,25 +2249,7 @@ expect(foo).to receive(:bar).with(42)
 | -
 |===
 
-Ensure that subject is defined using subject helper.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-let(:subject) { foo }
-let!(:subject) { foo }
-subject(:subject) { foo }
-subject!(:subject) { foo }
-
-# bad
-block = -> {}
-let(:subject, &block)
-
-# good
-subject(:test_subject) { foo }
-----
+No documentation
 
 === References
 
@@ -5567,55 +2267,12 @@ subject(:test_subject) { foo }
 | 2.8
 |===
 
-Checks for stubbed test subjects.
-
-Checks nested subject stubs for innermost subject definition
-when subject is also defined in parent example groups.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-describe Article do
-  subject(:article) { Article.new }
-
-  it 'indicates that the author is unknown' do
-    allow(article).to receive(:author).and_return(nil)
-    expect(article.description).to include('by an unknown author')
-  end
-end
-
-# bad
-describe Article do
-  subject(:foo) { Article.new }
-
-  context 'nested subject' do
-    subject(:article) { Article.new }
-
-    it 'indicates that the author is unknown' do
-      allow(article).to receive(:author).and_return(nil)
-      expect(article.description).to include('by an unknown author')
-    end
-  end
-end
-
-# good
-describe Article do
-  subject(:article) { Article.new(author: nil) }
-
-  it 'indicates that the author is unknown' do
-    expect(article.description).to include('by an unknown author')
-  end
-end
-----
+No documentation
 
 === References
 
 * https://rspec.rubystyle.guide/#dont-stub-subject
 * https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/SubjectStub
-* https://robots.thoughtbot.com/don-t-stub-the-system-under-test
-* https://penelope.zone/2015/12/27/introducing-rspec-smells-and-where-to-find-them.html#smell-1-stubjec
 
 == RSpec/UnspecifiedException
 
@@ -5629,36 +2286,7 @@ end
 | -
 |===
 
-Checks for a specified error in checking raised errors.
-
-Enforces one of an Exception type, a string, or a regular
-expression to match against the exception message as a parameter
-to `raise_error`
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect {
-  raise StandardError.new('error')
-}.to raise_error
-
-# good
-expect {
-  raise StandardError.new('error')
-}.to raise_error(StandardError)
-
-expect {
-  raise StandardError.new('error')
-}.to raise_error('error')
-
-expect {
-  raise StandardError.new('error')
-}.to raise_error(/err/)
-
-expect { do_something }.not_to raise_error
-----
+No documentation
 
 === References
 
@@ -5676,35 +2304,7 @@ expect { do_something }.not_to raise_error
 | -
 |===
 
-Checks that memoized helpers names are symbols or strings.
-
-=== Examples
-
-==== EnforcedStyle: symbols (default)
-
-[source,ruby]
-----
-# bad
-subject('user') { create_user }
-let('user_name') { 'Adam' }
-
-# good
-subject(:user) { create_user }
-let(:user_name) { 'Adam' }
-----
-
-==== EnforcedStyle: strings
-
-[source,ruby]
-----
-# bad
-subject(:user) { create_user }
-let(:user_name) { 'Adam' }
-
-# good
-subject('user') { create_user }
-let('user_name') { 'Adam' }
-----
+No documentation
 
 === Configurable attributes
 
@@ -5732,56 +2332,7 @@ let('user_name') { 'Adam' }
 | 2.13
 |===
 
-Checks that memoized helper names use the configured style.
-
-Variables can be excluded from checking using the `AllowedPatterns`
-option.
-
-=== Examples
-
-==== EnforcedStyle: snake_case (default)
-
-[source,ruby]
-----
-# bad
-subject(:userName1) { 'Adam' }
-let(:userName2) { 'Adam' }
-
-# good
-subject(:user_name_1) { 'Adam' }
-let(:user_name_2) { 'Adam' }
-----
-
-==== EnforcedStyle: camelCase
-
-[source,ruby]
-----
-# bad
-subject(:user_name_1) { 'Adam' }
-let(:user_name_2) { 'Adam' }
-
-# good
-subject(:userName1) { 'Adam' }
-let(:userName2) { 'Adam' }
-----
-
-==== AllowedPatterns configuration
-
-[source,ruby]
-----
-# rubocop.yml
-# RSpec/VariableName:
-#   EnforcedStyle: snake_case
-#   AllowedPatterns:
-#     - ^userFood
-----
-
-[source,ruby]
-----
-# okay because it matches the `^userFood` regex in `AllowedPatterns`
-subject(:userFood_1) { 'spaghetti' }
-let(:userFood_2) { 'fettuccine' }
-----
+No documentation
 
 === Configurable attributes
 
@@ -5813,54 +2364,7 @@ let(:userFood_2) { 'fettuccine' }
 | 2.12
 |===
 
-Checks for consistent verified double reference style.
-
-Only investigates references that are one of the supported styles.
-
-This cop can be configured in your configuration using the
-`EnforcedStyle` option and supports `--auto-gen-config`.
-
-=== Examples
-
-==== `EnforcedStyle: constant` (default)
-
-[source,ruby]
-----
-# bad
-let(:foo) do
-  instance_double('ClassName', method_name: 'returned_value')
-end
-
-# good
-let(:foo) do
-  instance_double(ClassName, method_name: 'returned_value')
-end
-----
-
-==== `EnforcedStyle: string`
-
-[source,ruby]
-----
-# bad
-let(:foo) do
-  instance_double(ClassName, method_name: 'returned_value')
-end
-
-# good
-let(:foo) do
-  instance_double('ClassName', method_name: 'returned_value')
-end
-----
-
-==== Reference is not in the supported style list. No enforcement
-
-[source,ruby]
-----
-# good
-let(:foo) do
-  instance_double(@klass, method_name: 'returned_value')
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -5875,7 +2379,6 @@ end
 === References
 
 * https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/VerifiedDoubleReference
-* https://rspec.info/features/3-12/rspec-mocks/verifying-doubles
 
 == RSpec/VerifiedDoubles
 
@@ -5889,27 +2392,7 @@ end
 | 1.5
 |===
 
-Prefer using verifying doubles over normal doubles.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-let(:foo) do
-  double(method_name: 'returned value')
-end
-
-# bad
-let(:foo) do
-  double("ClassName", method_name: 'returned value')
-end
-
-# good
-let(:foo) do
-  instance_double("ClassName", method_name: 'returned value')
-end
-----
+No documentation
 
 === Configurable attributes
 
@@ -5929,7 +2412,6 @@ end
 
 * https://rspec.rubystyle.guide/#doubles
 * https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/VerifiedDoubles
-* https://rspec.info/features/3-12/rspec-mocks/verifying-doubles
 
 == RSpec/VoidExpect
 
@@ -5943,18 +2425,7 @@ end
 | -
 |===
 
-Checks void `expect()`.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-expect(something)
-
-# good
-expect(something).to be(1)
-----
+No documentation
 
 === References
 
@@ -5972,18 +2443,7 @@ expect(something).to be(1)
 | -
 |===
 
-Checks for calling a block within a stub.
-
-=== Examples
-
-[source,ruby]
-----
-# bad
-allow(foo).to receive(:bar) { |&block| block.call(1) }
-
-# good
-expect(foo).to receive(:bar).and_yield(1)
-----
+No documentation
 
 === References
 

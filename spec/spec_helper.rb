@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rubocop'
-require 'rubocop/rspec/support'
+require 'rubocop/rspec/support' # `expect_offense` etc
 
 require 'simplecov' unless ENV['NO_COVERAGE']
 
@@ -9,7 +9,8 @@ module SpecHelper
   ROOT = Pathname.new(__dir__).parent.freeze
 end
 
-spec_helper_glob = '{support,shared,../lib/rubocop/rspec/shared_contexts}/*.rb'
+spec_helper_glob =
+  '{support,shared,../lib/rubocop/rspec/rails/shared_contexts}/*.rb'
 Dir
   .glob(File.expand_path(spec_helper_glob, __dir__))
   .sort
@@ -18,7 +19,7 @@ Dir
 RSpec.configure do |config|
   # Set metadata so smoke tests are run on all cop specs
   config.define_derived_metadata(
-    file_path: %r{/spec/rubocop/cop/rspec/(?!mixin/)}
+    file_path: %r{/spec/rubocop/cop/rspec/rails/}
   ) do |meta|
     meta[:type] = :cop_spec
   end
@@ -40,7 +41,7 @@ RSpec.configure do |config|
   # We should take their advice!
   config.raise_on_warning = true
 
-  config.include(ExpectOffense)
+  config.include RuboCop::RSpec::ExpectOffense
 
   config.include_context 'with default RSpec/Language config', :config
   config.include_context 'smoke test', type: :cop_spec
@@ -48,4 +49,4 @@ end
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
-require 'rubocop-rspec'
+require 'rubocop-rspec-rails'
