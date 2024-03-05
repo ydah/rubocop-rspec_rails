@@ -49,13 +49,13 @@ Lint/RedundantCopDisableDirective:
 
 Metrics/BlockLength:
   Exclude:
-    - rubocop-rspec-rails.gemspec
+    - rubocop-rspec_rails.gemspec
     - Rakefile
     - '**/*.rake'
 
 Naming/FileName:
   Exclude:
-    - lib/rubocop-rspec-rails.rb
+    - lib/rubocop-rspec_rails.rb
 
 Naming/InclusiveLanguage:
   Enabled: true

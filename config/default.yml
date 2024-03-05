@@ -1,13 +1,13 @@
 ---
 RSpecRails:
   Enabled: true
-  DocumentationBaseURL: https://docs.rubocop.org/rubocop-rspec-rails
+  DocumentationBaseURL: https://docs.rubocop.org/rubocop-rspec_rails
 
 RSpecRails/AvoidSetupHook:
   Description: Checks that tests use RSpec `before` hook over Rails `setup` method.
   Enabled: pending
   VersionAdded: '2.4'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/AvoidSetupHook
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/AvoidSetupHook
 
 RSpecRails/HaveHttpStatus:
   Description: Checks that tests use `have_http_status` instead of equality matchers.
@@ -18,7 +18,7 @@ RSpecRails/HaveHttpStatus:
   SafeAutoCorrect: false
   VersionAdded: '2.12'
   VersionChanged: '2.27'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/HaveHttpStatus
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/HaveHttpStatus
 
 RSpecRails/HttpStatus:
   Description: Enforces use of symbolic or numeric value to describe HTTP status.
@@ -30,14 +30,14 @@ RSpecRails/HttpStatus:
     - be_status
   VersionAdded: '1.23'
   VersionChanged: '2.20'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/HttpStatus
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/HttpStatus
 
 RSpecRails/InferredSpecType:
   Description: Identifies redundant spec type.
   Enabled: pending
   Safe: false
   VersionAdded: '2.14'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/InferredSpecType
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/InferredSpecType
   Inferences:
     channels: channel
     controllers: controller
@@ -59,7 +59,7 @@ RSpecRails/MinitestAssertions:
   Description: Check if using Minitest-like matchers.
   Enabled: pending
   VersionAdded: '2.17'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/MinitestAssertions
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/MinitestAssertions
 
 RSpecRails/NegationBeValid:
   Description: Enforces use of `be_invalid` or `not_to` for negated be_valid.
@@ -70,11 +70,11 @@ RSpecRails/NegationBeValid:
     - be_invalid
   Enabled: pending
   VersionAdded: '2.23'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/NegationBeValid
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/NegationBeValid
 
 RSpecRails/TravelAround:
   Description: Prefer to travel in `before` rather than `around`.
   Enabled: pending
   Safe: false
   VersionAdded: '2.19'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/TravelAround
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/TravelAround

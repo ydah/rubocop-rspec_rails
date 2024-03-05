@@ -29,7 +29,7 @@ desc 'Build config/default.yml'
 task :build_config do
   require 'yard'
 
-  require 'rubocop-rspec-rails'
+  require 'rubocop-rspec_rails'
   require 'rubocop/rspec_rails/config_formatter'
   require 'rubocop/rspec_rails/description_extractor'
 

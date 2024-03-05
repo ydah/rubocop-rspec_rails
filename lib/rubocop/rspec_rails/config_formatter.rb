@@ -9,7 +9,7 @@ module RuboCop
       EXTENSION_ROOT_DEPARTMENT = %r{^(RSpecRails/)}.freeze
       SUBDEPARTMENTS = [].freeze
       AMENDMENTS = [].freeze
-      COP_DOC_BASE_URL = 'https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/'
+      COP_DOC_BASE_URL = 'https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/'
 
       def initialize(config, descriptions)
         @config       = config

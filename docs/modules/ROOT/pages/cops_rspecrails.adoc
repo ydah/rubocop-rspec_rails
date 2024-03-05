@@ -37,7 +37,7 @@ end
 
 === References
 
-* https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/AvoidSetupHook
+* https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/AvoidSetupHook
 
 == RSpecRails/HaveHttpStatus
 
@@ -95,7 +95,7 @@ expect(last_response).to have_http_status(200)
 
 === References
 
-* https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/HaveHttpStatus
+* https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/HaveHttpStatus
 
 == RSpecRails/HttpStatus
 
@@ -183,7 +183,7 @@ it { is_expected.to have_http_status :error }
 
 === References
 
-* https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/HttpStatus
+* https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/HttpStatus
 
 == RSpecRails/InferredSpecType
 
@@ -266,7 +266,7 @@ end
 
 === References
 
-* https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/InferredSpecType
+* https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/InferredSpecType
 
 == RSpecRails/MinitestAssertions
 
@@ -312,7 +312,7 @@ expect(a).to be(false)
 
 === References
 
-* https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/MinitestAssertions
+* https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/MinitestAssertions
 
 == RSpecRails/NegationBeValid
 
@@ -375,7 +375,7 @@ expect(foo).to be_invalid.or be_even
 
 === References
 
-* https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/NegationBeValid
+* https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/NegationBeValid
 
 == RSpecRails/TravelAround
 
@@ -417,4 +417,4 @@ before { freeze_time }
 
 === References
 
-* https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/TravelAround
+* https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/TravelAround

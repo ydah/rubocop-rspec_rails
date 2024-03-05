@@ -1,24 +1,24 @@
 # RuboCop RSpec Rails
 
 [![Join the chat at https://gitter.im/rubocop-rspec/Lobby](https://badges.gitter.im/rubocop-rspec/Lobby.svg)](https://gitter.im/rubocop-rspec/Lobby)
-[![Gem Version](https://badge.fury.io/rb/rubocop-rspec-rails.svg)](https://rubygems.org/gems/rubocop-rspec-rails)
-![CI](https://github.com/rubocop/rubocop-rspec-rails/workflows/CI/badge.svg)
+[![Gem Version](https://badge.fury.io/rb/rubocop-rspec_rails.svg)](https://rubygems.org/gems/rubocop-rspec_rails)
+![CI](https://github.com/rubocop/rubocop-rspec_rails/workflows/CI/badge.svg)
 
 [RSpec Rails](https://rspec.info/)-specific analysis for your projects, as an extension to
 [RuboCop](https://github.com/rubocop/rubocop).
 
 ## Installation
 
-Just install the `rubocop-rspec-rails` gem
+Just install the `rubocop-rspec_rails` gem
 
 ```bash
-gem install rubocop-rspec-rails
+gem install rubocop-rspec_rails
 ```
 
 or if you use bundler put this in your `Gemfile`
 
 ```ruby
-gem 'rubocop-rspec-rails', require: false
+gem 'rubocop-rspec_rails', require: false
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ ways to do this:
 Put this into your `.rubocop.yml`.
 
 ```yaml
-require: rubocop-rspec-rails
+require: rubocop-rspec_rails
 ```
 
 Alternatively, use the following array notation when specifying multiple extensions.
@@ -39,7 +39,7 @@ Alternatively, use the following array notation when specifying multiple extensi
 ```yaml
 require:
   - rubocop-rspec
-  - rubocop-rspec-rails
+  - rubocop-rspec_rails
 ```
 
 Now you can run `rubocop` and it will automatically load the RuboCop RSpec Rails
@@ -48,20 +48,20 @@ cops together with the standard cops.
 ### Command line
 
 ```bash
-rubocop --require rubocop-rspec-rails
+rubocop --require rubocop-rspec_rails
 ```
 
 ### Rake task
 
 ```ruby
 RuboCop::RakeTask.new do |task|
-  task.requires << 'rubocop-rspec-rails'
+  task.requires << 'rubocop-rspec_rails'
 end
 ```
 
 ## Documentation
 
-You can read more about RuboCop RSpec in its [official manual](https://docs.rubocop.org/rubocop-rspec-rails).
+You can read more about RuboCop RSpec in its [official manual](https://docs.rubocop.org/rubocop-rspec_rails).
 
 ## The Cops
 
@@ -84,5 +84,5 @@ Checkout the [contribution guidelines](.github/CONTRIBUTING.md).
 
 ## License
 
-`rubocop-rspec-rails` is MIT licensed. [See the accompanying file](MIT-LICENSE.md) for
+`rubocop-rspec_rails` is MIT licensed. [See the accompanying file](MIT-LICENSE.md) for
 the full text.

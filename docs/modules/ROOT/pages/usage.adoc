@@ -8,7 +8,7 @@ There are three ways to do this:
 Put this into your `.rubocop.yml`:
 
 ----
-require: rubocop-rspec-rails
+require: rubocop-rspec_rails
 ----
 
 or, if you are using several extensions:
@@ -16,7 +16,7 @@ or, if you are using several extensions:
 ----
 require:
   - rubocop-rspec
-  - rubocop-rspec-rails
+  - rubocop-rspec_rails
 ----
 
 Now you can run `rubocop` and it will automatically load the RuboCop RSpec Rails
@@ -26,7 +26,7 @@ cops together with the standard cops.
 
 [source,bash]
 ----
-$ rubocop --require rubocop-rspec-rails
+$ rubocop --require rubocop-rspec_rails
 ----
 
 == Rake task
@@ -34,13 +34,13 @@ $ rubocop --require rubocop-rspec-rails
 [source,ruby]
 ----
 RuboCop::RakeTask.new do |task|
-  task.requires << 'rubocop-rspec-rails'
+  task.requires << 'rubocop-rspec_rails'
 end
 ----
 
 == Inspecting files that don't end with `_spec.rb`
 
-By default, `rubocop-rspec-rails` only inspects code within paths ending in `_spec.rb` or including `spec/`. You can override this setting in your config file by setting `Include`:
+By default, `rubocop-rspec_rails` only inspects code within paths ending in `_spec.rb` or including `spec/`. You can override this setting in your config file by setting `Include`:
 
 [source,yaml]
 ----

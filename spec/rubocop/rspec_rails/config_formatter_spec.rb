@@ -49,19 +49,19 @@ RSpec.describe RuboCop::RSpecRails::ConfigFormatter do
         Config: 2
         Enabled: true
         Description: Blah
-        Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/Foo
+        Reference: https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/Foo
 
       RSpecRails/Bar:
         Enabled: true
         Nullable: ~
         Description: Wow
-        Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/Bar
+        Reference: https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/Bar
 
       RSpecRails/Baz:
         Enabled: true
         StyleGuide: "#buzz"
         Description: Woof
-        Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/Baz
+        Reference: https://www.rubydoc.info/gems/rubocop-rspec_rails/RuboCop/Cop/RSpecRails/Baz
     YAML
   end
 end
