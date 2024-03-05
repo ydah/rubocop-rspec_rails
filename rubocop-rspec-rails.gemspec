@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.unshift File.expand_path('lib', __dir__)
-require 'rubocop/rspec/rails/version'
+require 'rubocop/rspec_rails/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'rubocop-rspec-rails'
@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   ]
   spec.licenses = ['MIT']
 
-  spec.version = RuboCop::RSpec::Rails::Version::STRING
+  spec.version = RuboCop::RSpecRails::Version::STRING
   spec.platform = Gem::Platform::RUBY
   spec.required_ruby_version = '>= 2.7.0'
 

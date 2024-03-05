@@ -6,8 +6,9 @@ require 'yaml'
 require 'rubocop'
 require 'rubocop-rspec'
 
-require_relative 'rubocop/rspec/rails'
+require_relative 'rubocop/cop/rspec_rails_cops'
 
-require_relative 'rubocop/cop/rspec-rails_cops'
+project_root = File.join(__dir__, '..')
+RuboCop::ConfigLoader.inject_defaults!(project_root)
 
 RuboCop::AST::Node.include(RuboCop::RSpec::Node)

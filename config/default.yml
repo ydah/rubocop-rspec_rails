@@ -1,115 +1,15 @@
 ---
-RSpec/Rails:
+RSpecRails:
   Enabled: true
-  Include:
-    - "**/*_spec.rb"
-    - "**/spec/**/*"
   DocumentationBaseURL: https://docs.rubocop.org/rubocop-rspec-rails
-  Language:
-    inherit_mode:
-      merge:
-        - Expectations
-        - Helpers
-        - Hooks
-        - Subjects
-    ExampleGroups:
-      inherit_mode:
-        merge:
-          - Regular
-          - Skipped
-          - Focused
-      Regular:
-        - describe
-        - context
-        - feature
-        - example_group
-      Skipped:
-        - xdescribe
-        - xcontext
-        - xfeature
-      Focused:
-        - fdescribe
-        - fcontext
-        - ffeature
-    Examples:
-      inherit_mode:
-        merge:
-          - Regular
-          - Skipped
-          - Focused
-          - Pending
-      Regular:
-        - it
-        - specify
-        - example
-        - scenario
-        - its
-      Focused:
-        - fit
-        - fspecify
-        - fexample
-        - fscenario
-        - focus
-      Skipped:
-        - xit
-        - xspecify
-        - xexample
-        - xscenario
-        - skip
-      Pending:
-        - pending
-    Expectations:
-      - are_expected
-      - expect
-      - expect_any_instance_of
-      - is_expected
-      - should
-      - should_not
-      - should_not_receive
-      - should_receive
-    Helpers:
-      - let
-      - let!
-    Hooks:
-      - prepend_before
-      - before
-      - append_before
-      - around
-      - prepend_after
-      - after
-      - append_after
-    Includes:
-      inherit_mode:
-        merge:
-          - Examples
-          - Context
-      Examples:
-        - it_behaves_like
-        - it_should_behave_like
-        - include_examples
-      Context:
-        - include_context
-    SharedGroups:
-      inherit_mode:
-        merge:
-          - Examples
-          - Context
-      Examples:
-        - shared_examples
-        - shared_examples_for
-      Context:
-        - shared_context
-    Subjects:
-      - subject
-      - subject!
 
-RSpec/Rails/AvoidSetupHook:
+RSpecRails/AvoidSetupHook:
   Description: Checks that tests use RSpec `before` hook over Rails `setup` method.
   Enabled: pending
   VersionAdded: '2.4'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpec/Rails/AvoidSetupHook
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/AvoidSetupHook
 
-RSpec/Rails/HaveHttpStatus:
+RSpecRails/HaveHttpStatus:
   Description: Checks that tests use `have_http_status` instead of equality matchers.
   Enabled: pending
   ResponseMethods:
@@ -118,9 +18,9 @@ RSpec/Rails/HaveHttpStatus:
   SafeAutoCorrect: false
   VersionAdded: '2.12'
   VersionChanged: '2.27'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpec/Rails/HaveHttpStatus
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/HaveHttpStatus
 
-RSpec/Rails/HttpStatus:
+RSpecRails/HttpStatus:
   Description: Enforces use of symbolic or numeric value to describe HTTP status.
   Enabled: true
   EnforcedStyle: symbolic
@@ -130,14 +30,14 @@ RSpec/Rails/HttpStatus:
     - be_status
   VersionAdded: '1.23'
   VersionChanged: '2.20'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpec/Rails/HttpStatus
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/HttpStatus
 
-RSpec/Rails/InferredSpecType:
+RSpecRails/InferredSpecType:
   Description: Identifies redundant spec type.
   Enabled: pending
   Safe: false
   VersionAdded: '2.14'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpec/Rails/InferredSpecType
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/InferredSpecType
   Inferences:
     channels: channel
     controllers: controller
@@ -155,13 +55,13 @@ RSpec/Rails/InferredSpecType:
     system: system
     views: view
 
-RSpec/Rails/MinitestAssertions:
+RSpecRails/MinitestAssertions:
   Description: Check if using Minitest-like matchers.
   Enabled: pending
   VersionAdded: '2.17'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpec/Rails/MinitestAssertions
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/MinitestAssertions
 
-RSpec/Rails/NegationBeValid:
+RSpecRails/NegationBeValid:
   Description: Enforces use of `be_invalid` or `not_to` for negated be_valid.
   Safe: false
   EnforcedStyle: not_to
@@ -170,11 +70,11 @@ RSpec/Rails/NegationBeValid:
     - be_invalid
   Enabled: pending
   VersionAdded: '2.23'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpec/Rails/NegationBeValid
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/NegationBeValid
 
-RSpec/Rails/TravelAround:
+RSpecRails/TravelAround:
   Description: Prefer to travel in `before` rather than `around`.
   Enabled: pending
   Safe: false
   VersionAdded: '2.19'
-  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpec/Rails/TravelAround
+  Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/TravelAround

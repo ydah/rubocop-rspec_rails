@@ -55,7 +55,6 @@ Metrics/BlockLength:
 
 Naming/FileName:
   Exclude:
-    - lib/rubocop/cop/rspec-rails_cops.rb
     - lib/rubocop-rspec-rails.rb
 
 Naming/InclusiveLanguage:
@@ -135,7 +134,7 @@ Style/RedundantStringEscape:
 Style/ReturnNilInPredicateMethodDefinition:
   Enabled: true
 
-# Enable our own pending cops.
+# Enable pending rubocop-rspec cops.
 
 RSpec/BeEmpty:
   Enabled: true

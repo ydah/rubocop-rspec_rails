@@ -2,9 +2,9 @@
 
 require 'yard'
 
-require 'rubocop/rspec/rails/description_extractor'
+require 'rubocop/rspec_rails/description_extractor'
 
-RSpec.describe RuboCop::RSpec::Rails::DescriptionExtractor do
+RSpec.describe RuboCop::RSpecRails::DescriptionExtractor do
   let(:yardocs) do
     YARD.parse_string(<<~RUBY)
       # This is not a cop
@@ -14,7 +14,7 @@ RSpec.describe RuboCop::RSpec::Rails::DescriptionExtractor do
       # This is not a concrete cop
       #
       # @abstract
-      class RuboCop::Cop::RSpec::Base
+      class RuboCop::Cop::RSpecRails::Base
       end
 
       # Checks foo
@@ -22,7 +22,7 @@ RSpec.describe RuboCop::RSpec::Rails::DescriptionExtractor do
       # Some description
       #
       # @note only works with foo
-      class RuboCop::Cop::RSpec::Foo < RuboCop::Cop::RSpec::Base
+      class RuboCop::Cop::RSpecRails::Foo < RuboCop::Cop::RSpec::Base
         # Hello
         def bar
         end
@@ -32,7 +32,7 @@ RSpec.describe RuboCop::RSpec::Rails::DescriptionExtractor do
         end
       end
 
-      class RuboCop::Cop::RSpec::Undocumented < RuboCop::Cop::RSpec::Base
+      class RuboCop::Cop::RSpecRails::Undocumented < RuboCop::Cop::RSpec::Base
         # Hello
         def bar
         end
@@ -54,7 +54,7 @@ RSpec.describe RuboCop::RSpec::Rails::DescriptionExtractor do
   end
 
   def stub_cop_const(name)
-    stub_const("RuboCop::Cop::RSpec::#{name}", Class.new(temp_class))
+    stub_const("RuboCop::Cop::RSpecRails::#{name}", Class.new(temp_class))
   end
 
   before do
@@ -64,8 +64,8 @@ RSpec.describe RuboCop::RSpec::Rails::DescriptionExtractor do
 
   it 'builds a hash of descriptions' do
     expect(described_class.new(yardocs).to_h).to eql(
-      'RSpec/Foo'          => { 'Description' => 'Checks foo' },
-      'RSpec/Undocumented' => { 'Description' => ''           }
+      'RSpecRails/Foo'          => { 'Description' => 'Checks foo' },
+      'RSpecRails/Undocumented' => { 'Description' => ''           }
     )
   end
 end

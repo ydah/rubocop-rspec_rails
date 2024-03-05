@@ -45,7 +45,7 @@ By default, `rubocop-rspec-rails` only inspects code within paths ending in `_sp
 [source,yaml]
 ----
 # Inspect files in `test/` directory
-RSpec/Rails:
+RSpecRails:
   Include:
     - '**/test/**/*'
 ----
@@ -53,7 +53,7 @@ RSpec/Rails:
 [source,yaml]
 ----
 # Inspect only files ending with `_test.rb`
-RSpec/Rails:
+RSpecRails:
   Include:
     - '**/*_test.rb'
 ----

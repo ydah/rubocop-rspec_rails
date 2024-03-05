@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-require 'rubocop/rspec/rails/config_formatter'
+require 'rubocop/rspec_rails/config_formatter'
 
-RSpec.describe RuboCop::RSpec::Rails::ConfigFormatter do
+RSpec.describe RuboCop::RSpecRails::ConfigFormatter do
   let(:config) do
     {
       'AllCops' => {
         'Setting' => 'forty two'
       },
-      'RSpec/Rails/Foo' => {
+      'RSpecRails/Foo' => {
         'Config' => 2,
         'Enabled' => true
       },
-      'RSpec/Rails/Bar' => {
+      'RSpecRails/Bar' => {
         'Enabled' => true,
         'Nullable' => nil
       },
-      'RSpec/Rails/Baz' => {
+      'RSpecRails/Baz' => {
         'Enabled' => true,
         'StyleGuide' => '#buzz'
       }
@@ -25,13 +25,13 @@ RSpec.describe RuboCop::RSpec::Rails::ConfigFormatter do
 
   let(:descriptions) do
     {
-      'RSpec/Rails/Foo' => {
+      'RSpecRails/Foo' => {
         'Description' => 'Blah'
       },
-      'RSpec/Rails/Bar' => {
+      'RSpecRails/Bar' => {
         'Description' => 'Wow'
       },
-      'RSpec/Rails/Baz' => {
+      'RSpecRails/Baz' => {
         'Description' => 'Woof'
       }
     }
@@ -45,23 +45,23 @@ RSpec.describe RuboCop::RSpec::Rails::ConfigFormatter do
       AllCops:
         Setting: forty two
 
-      RSpec/Rails/Foo:
+      RSpecRails/Foo:
         Config: 2
         Enabled: true
         Description: Blah
-        Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpec/Rails/Foo
+        Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/Foo
 
-      RSpec/Rails/Bar:
+      RSpecRails/Bar:
         Enabled: true
         Nullable: ~
         Description: Wow
-        Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpec/Rails/Bar
+        Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/Bar
 
-      RSpec/Rails/Baz:
+      RSpecRails/Baz:
         Enabled: true
         StyleGuide: "#buzz"
         Description: Woof
-        Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpec/Rails/Baz
+        Reference: https://www.rubydoc.info/gems/rubocop-rspec-rails/RuboCop/Cop/RSpecRails/Baz
     YAML
   end
 end

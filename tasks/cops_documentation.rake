@@ -14,7 +14,7 @@ desc 'Generate docs of all cops departments'
 task generate_cops_documentation: :yard_for_generate_documentation do
   RuboCop::Cop::Registry.with_temporary_global do
     generator = CopsDocumentationGenerator.new(
-      departments: %w[RSpec/Rails]
+      departments: %w[RSpecRails]
     )
     generator.call
   end

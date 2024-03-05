@@ -66,14 +66,14 @@ You can read more about RuboCop RSpec in its [official manual](https://docs.rubo
 ## The Cops
 
 All cops are located under
-[`lib/rubocop/cop/rspec-rails`](lib/rubocop/cop/rspec-rails), and contain
+[`lib/rubocop/cop/rspec_rails`](lib/rubocop/cop/rspec_rails), and contain
 examples/documentation.
 
 In your `.rubocop.yml`, you may treat the RSpec cops just like any other
 cop. For example:
 
 ```yaml
-RSpec/Rails/AvoidSetupHook:
+RSpecRails/AvoidSetupHook:
   Exclude:
     - spec/my_poorly_named_spec_file.rb
 ```

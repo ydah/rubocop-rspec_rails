@@ -1,13 +1,13 @@
 // START_COP_LIST
 
-=== Department xref:cops_rspec_rails.adoc[RSpec/Rails]
+=== Department xref:cops_rspecrails.adoc[RSpecRails]
 
-* xref:cops_rspec_rails.adoc#rspecrails/avoidsetuphook[RSpec/Rails/AvoidSetupHook]
-* xref:cops_rspec_rails.adoc#rspecrails/havehttpstatus[RSpec/Rails/HaveHttpStatus]
-* xref:cops_rspec_rails.adoc#rspecrails/httpstatus[RSpec/Rails/HttpStatus]
-* xref:cops_rspec_rails.adoc#rspecrails/inferredspectype[RSpec/Rails/InferredSpecType]
-* xref:cops_rspec_rails.adoc#rspecrails/minitestassertions[RSpec/Rails/MinitestAssertions]
-* xref:cops_rspec_rails.adoc#rspecrails/negationbevalid[RSpec/Rails/NegationBeValid]
-* xref:cops_rspec_rails.adoc#rspecrails/travelaround[RSpec/Rails/TravelAround]
+* xref:cops_rspecrails.adoc#rspecrailsavoidsetuphook[RSpecRails/AvoidSetupHook]
+* xref:cops_rspecrails.adoc#rspecrailshavehttpstatus[RSpecRails/HaveHttpStatus]
+* xref:cops_rspecrails.adoc#rspecrailshttpstatus[RSpecRails/HttpStatus]
+* xref:cops_rspecrails.adoc#rspecrailsinferredspectype[RSpecRails/InferredSpecType]
+* xref:cops_rspecrails.adoc#rspecrailsminitestassertions[RSpecRails/MinitestAssertions]
+* xref:cops_rspecrails.adoc#rspecrailsnegationbevalid[RSpecRails/NegationBeValid]
+* xref:cops_rspecrails.adoc#rspecrailstravelaround[RSpecRails/TravelAround]
 
 // END_COP_LIST

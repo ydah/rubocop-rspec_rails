@@ -7,13 +7,12 @@ RSpec.describe 'config/default.yml' do
 
   let(:namespaces) do
     {
-      'rails' => 'RSpec/Rails'
+      'rspec_rails' => 'RSpecRails'
     }
   end
 
   let(:cop_names) do
-    glob = SpecHelper::ROOT.join('lib', 'rubocop', 'cop',
-                                 'rspec', 'rails', '*.rb')
+    glob = SpecHelper::ROOT.join('lib', 'rubocop', 'cop', 'rspec_rails', '*.rb')
     Pathname.glob(glob).map do |file|
       file_name = file.basename('.rb').to_s
       cop_name  = file_name.gsub(/(^|_)(.)/) { Regexp.last_match(2).upcase }
@@ -42,9 +41,9 @@ RSpec.describe 'config/default.yml' do
   end
 
   it 'sorts configuration keys alphabetically with nested namespaces last' do
-    keys = default_config.keys.select { |key| key.start_with?('RSpec/Rails') }
+    keys = default_config.keys.select { |key| key.start_with?('RSpecRails') }
     namespaced_keys = keys.select do |key|
-      key.start_with?(*(namespaces.values - ['RSpec/Rails']))
+      key.start_with?(*(namespaces.values - ['RSpecRails']))
     end
 
     expected = keys.sort_by do |key|
