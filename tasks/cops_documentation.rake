@@ -12,12 +12,10 @@ end
 
 desc 'Generate docs of all cops departments'
 task generate_cops_documentation: :yard_for_generate_documentation do
-  RuboCop::Cop::Registry.with_temporary_global do
-    generator = CopsDocumentationGenerator.new(
-      departments: %w[RSpecRails]
-    )
-    generator.call
-  end
+  generator = CopsDocumentationGenerator.new(
+    departments: %w[RSpecRails]
+  )
+  generator.call
 end
 
 desc 'Syntax check for the documentation comments'
