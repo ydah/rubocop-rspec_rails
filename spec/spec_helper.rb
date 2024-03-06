@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rubocop'
-require 'rubocop/rspec/support' # `expect_offense` etc¥
+require 'rubocop/rspec/support' # `expect_offense` etc
 
 require 'rubocop/rspec/shared_contexts/default_rspec_language_config_context'
 
