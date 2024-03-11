@@ -2,6 +2,106 @@
 RSpecRails:
   Enabled: true
   DocumentationBaseURL: https://docs.rubocop.org/rubocop-rspec_rails
+  Include:
+    - "**/*_spec.rb"
+    - "**/spec/**/*"
+  Language:
+    inherit_mode:
+      merge:
+        - Expectations
+        - Helpers
+        - Hooks
+        - Subjects
+    ExampleGroups:
+      inherit_mode:
+        merge:
+          - Regular
+          - Skipped
+          - Focused
+      Regular:
+        - describe
+        - context
+        - feature
+        - example_group
+      Skipped:
+        - xdescribe
+        - xcontext
+        - xfeature
+      Focused:
+        - fdescribe
+        - fcontext
+        - ffeature
+    Examples:
+      inherit_mode:
+        merge:
+          - Regular
+          - Skipped
+          - Focused
+          - Pending
+      Regular:
+        - it
+        - specify
+        - example
+        - scenario
+        - its
+      Focused:
+        - fit
+        - fspecify
+        - fexample
+        - fscenario
+        - focus
+      Skipped:
+        - xit
+        - xspecify
+        - xexample
+        - xscenario
+        - skip
+      Pending:
+        - pending
+    Expectations:
+      - are_expected
+      - expect
+      - expect_any_instance_of
+      - is_expected
+      - should
+      - should_not
+      - should_not_receive
+      - should_receive
+    Helpers:
+      - let
+      - let!
+    Hooks:
+      - prepend_before
+      - before
+      - append_before
+      - around
+      - prepend_after
+      - after
+      - append_after
+    Includes:
+      inherit_mode:
+        merge:
+          - Examples
+          - Context
+      Examples:
+        - it_behaves_like
+        - it_should_behave_like
+        - include_examples
+      Context:
+        - include_context
+    SharedGroups:
+      inherit_mode:
+        merge:
+          - Examples
+          - Context
+      Examples:
+        - shared_examples
+        - shared_examples_for
+      Context:
+        - shared_context
+    Subjects:
+      - subject
+      - subject!
 
 RSpecRails/AvoidSetupHook:
   Description: Checks that tests use RSpec `before` hook over Rails `setup` method.

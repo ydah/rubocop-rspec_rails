@@ -13,12 +13,14 @@ RSpec.describe 'config/default.yml' do
 
   let(:cop_names) do
     glob = SpecHelper::ROOT.join('lib', 'rubocop', 'cop', 'rspec_rails', '*.rb')
-    Pathname.glob(glob).map do |file|
+    cop_names = Pathname.glob(glob).map do |file|
       file_name = file.basename('.rb').to_s
       cop_name  = file_name.gsub(/(^|_)(.)/) { Regexp.last_match(2).upcase }
       namespace = namespaces[file.dirname.basename.to_s]
       "#{namespace}/#{cop_name}"
     end
+
+    cop_names - %w[RSpecRails/Base]
   end
 
   let(:config_keys) do

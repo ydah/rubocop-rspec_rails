@@ -34,8 +34,16 @@ task :build_config do
   require 'rubocop/rspec_rails/description_extractor'
 
   glob = File.join('lib', 'rubocop', 'cop', 'rspec_rails', '*.rb')
+  # Due to YARD's sensitivity to file require order (as of 0.9.25),
+  # we have to prepend the list with our base cop,
+  # RuboCop::Cop::RSpecRails::Base. Otherwise, cop's parent class for cops
+  # loaded before our base cop class are detected as RuboCop::Cop::Base,
+  # and that complicates the detection of their relation with
+  # RuboCop RSpec Rails.
+  rspec_rails_cop_path =
+    File.join('lib', 'rubocop', 'cop', 'rspec_rails', 'base.rb')
   YARD::Tags::Library.define_tag('Cop Safety Information', :safety)
-  YARD.parse(Dir[glob], [])
+  YARD.parse(Dir[glob].prepend(rspec_rails_cop_path), [])
 
   descriptions =
     RuboCop::RSpecRails::DescriptionExtractor.new(

@@ -10,7 +10,7 @@ module RuboCop
 
       def to_h
         code_objects
-          .select(&:rspec_cop?)
+          .select(&:rspec_rails_cop?)
           .map(&:configuration)
           .reduce(:merge)
       end
@@ -21,9 +21,9 @@ module RuboCop
 
       # Decorator of a YARD code object for working with documented rspec cops
       class CodeObject
-        RSPEC_COP_CLASS_NAME = 'RuboCop::Cop::RSpec::Base'
+        RSPEC_RAILS_COP_CLASS_NAME = 'RuboCop::Cop::RSpecRails::Base'
         RUBOCOP_COP_CLASS_NAME = 'RuboCop::Cop::Base'
-        RSPEC_NAMESPACE = 'RuboCop::Cop::RSpecRails'
+        RSPEC_RAILS_NAMESPACE = 'RuboCop::Cop::RSpecRails'
 
         def initialize(yardoc)
           @yardoc = yardoc
@@ -32,8 +32,8 @@ module RuboCop
         # Test if the YARD code object documents a concrete rspec cop class
         #
         # @return [Boolean]
-        def rspec_cop?
-          cop_subclass? && !abstract? && rspec_cop_namespace?
+        def rspec_rails_cop?
+          cop_subclass? && !abstract? && rspec_rails_cop_namespace?
         end
 
         # Configuration for the documented cop that would live in default.yml
@@ -53,8 +53,8 @@ module RuboCop
           yardoc.docstring.split("\n\n").first.to_s
         end
 
-        def rspec_cop_namespace?
-          documented_constant.start_with?(RSPEC_NAMESPACE)
+        def rspec_rails_cop_namespace?
+          documented_constant.start_with?(RSPEC_RAILS_NAMESPACE)
         end
 
         def documented_constant
@@ -62,7 +62,7 @@ module RuboCop
         end
 
         def cop_subclass?
-          yardoc.superclass.path == RSPEC_COP_CLASS_NAME ||
+          yardoc.superclass.path == RSPEC_RAILS_COP_CLASS_NAME ||
             yardoc.superclass.path == RUBOCOP_COP_CLASS_NAME
         end
 
