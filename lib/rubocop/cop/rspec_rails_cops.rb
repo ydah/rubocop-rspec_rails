@@ -6,7 +6,7 @@ require_relative 'rspec_rails/negation_be_valid'
 begin
   require_relative 'rspec_rails/http_status'
 rescue LoadError
-  # Rails/HttpStatus cannot be loaded if rack/utils is unavailable.
+  # RSpecRails/HttpStatus cannot be loaded if rack/utils is unavailable.
 end
 require_relative 'rspec_rails/inferred_spec_type'
 require_relative 'rspec_rails/minitest_assertions'
