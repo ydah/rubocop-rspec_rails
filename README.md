@@ -61,7 +61,7 @@ end
 
 ## Documentation
 
-You can read more about RuboCop RSpec in its [official manual](https://docs.rubocop.org/rubocop-rspec_rails).
+You can read more about RuboCop RSpec Rails in its [official manual](https://docs.rubocop.org/rubocop-rspec_rails).
 
 ## The Cops
 
@@ -69,7 +69,7 @@ All cops are located under
 [`lib/rubocop/cop/rspec_rails`](lib/rubocop/cop/rspec_rails), and contain
 examples/documentation.
 
-In your `.rubocop.yml`, you may treat the RSpec cops just like any other
+In your `.rubocop.yml`, you may treat the RSpec Rails cops just like any other
 cop. For example:
 
 ```yaml
