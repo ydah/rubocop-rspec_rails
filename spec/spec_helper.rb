@@ -19,7 +19,7 @@ Dir
 RSpec.configure do |config|
   # Set metadata so smoke tests are run on all cop specs
   config.define_derived_metadata(
-    file_path: %r{/spec/rubocop/cop/rspec_rails/}
+    file_path: %r{/spec/rubocop/cop/}
   ) do |meta|
     meta[:type] = :cop_spec
   end
