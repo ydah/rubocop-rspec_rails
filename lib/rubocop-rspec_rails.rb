@@ -4,8 +4,8 @@ require 'pathname'
 require 'yaml'
 
 require 'rubocop'
+require 'rubocop-rspec'
 
-require_relative 'rubocop/rspec_rails/language'
 require_relative 'rubocop/rspec_rails/version'
 
 require_relative 'rubocop/cop/rspec_rails/base'

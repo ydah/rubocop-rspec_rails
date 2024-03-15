@@ -5,7 +5,7 @@ module RuboCop
     module RSpecRails
       # @abstract parent class to RSpec Rails cops
       class Base < ::RuboCop::Cop::Base
-        include RuboCop::RSpecRails::Language
+        include RuboCop::RSpec::Language
 
         exclude_from_registry
 
@@ -18,8 +18,7 @@ module RuboCop
         # that have no other means of accessing the configuration.
         def on_new_investigation
           super
-          RuboCop::RSpecRails::Language.config =
-            config['RSpecRails']['Language']
+          RuboCop::RSpec::Language.config = config['RSpecRails']['Language']
         end
       end
     end
