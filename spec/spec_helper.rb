@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rubocop'
+require 'rubocop/rspec/shared_contexts/default_rspec_language_config_context'
 require 'rubocop/rspec/support' # `expect_offense` etc
 
 require 'simplecov' unless ENV['NO_COVERAGE']
@@ -10,7 +11,7 @@ module SpecHelper
 end
 
 spec_helper_glob =
-  '{support,shared,../lib/rubocop/rspec_rails/shared_contexts}/*.rb'
+  '{support,shared,../lib/rubocop/rspec/shared_contexts}/*.rb'
 Dir
   .glob(File.expand_path(spec_helper_glob, __dir__))
   .sort
@@ -43,7 +44,7 @@ RSpec.configure do |config|
 
   config.include(ExpectOffense)
 
-  config.include_context 'with default RSpecRails/Language config', :config
+  config.include_context 'with default RSpec/Language config', :config
   config.include_context 'smoke test', type: :cop_spec
 end
 

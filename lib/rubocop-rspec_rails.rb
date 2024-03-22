@@ -8,7 +8,6 @@ require 'rubocop-rspec'
 
 require_relative 'rubocop/rspec_rails/version'
 
-require_relative 'rubocop/cop/rspec_rails/base'
 require_relative 'rubocop/cop/rspec_rails_cops'
 
 project_root = File.join(__dir__, '..')

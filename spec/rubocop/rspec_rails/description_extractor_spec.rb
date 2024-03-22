@@ -14,7 +14,7 @@ RSpec.describe RuboCop::RSpecRails::DescriptionExtractor do
       # This is not a concrete cop
       #
       # @abstract
-      class RuboCop::Cop::RSpecRails::Base
+      class RuboCop::Cop::RSpec::Base
       end
 
       # Checks foo
@@ -22,7 +22,7 @@ RSpec.describe RuboCop::RSpecRails::DescriptionExtractor do
       # Some description
       #
       # @note only works with foo
-      class RuboCop::Cop::RSpecRails::Foo < RuboCop::Cop::RSpecRails::Base
+      class RuboCop::Cop::RSpecRails::Foo < RuboCop::Cop::RSpec::Base
         # Hello
         def bar
         end
@@ -32,7 +32,7 @@ RSpec.describe RuboCop::RSpecRails::DescriptionExtractor do
         end
       end
 
-      class RuboCop::Cop::RSpecRails::Undocumented < RuboCop::Cop::RSpecRails::Base
+      class RuboCop::Cop::RSpecRails::Undocumented < RuboCop::Cop::RSpec::Base
         # Hello
         def bar
         end

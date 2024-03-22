@@ -21,7 +21,7 @@ module RuboCop
 
       # Decorator of a YARD code object for working with documented rspec cops
       class CodeObject
-        RSPEC_RAILS_COP_CLASS_NAME = 'RuboCop::Cop::RSpecRails::Base'
+        RSPEC_RAILS_COP_CLASS_NAME = 'RuboCop::Cop::RSpec::Base'
         RUBOCOP_COP_CLASS_NAME = 'RuboCop::Cop::Base'
 
         def initialize(yardoc)
