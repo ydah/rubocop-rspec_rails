@@ -49,13 +49,13 @@ Lint/RedundantCopDisableDirective:
 
 Metrics/BlockLength:
   Exclude:
-    - rubocop-rspec.gemspec
+    - rubocop-rspec_rails.gemspec
     - Rakefile
     - '**/*.rake'
 
 Naming/FileName:
   Exclude:
-    - lib/rubocop-rspec.rb
+    - lib/rubocop-rspec_rails.rb
 
 Naming/InclusiveLanguage:
   Enabled: true
@@ -115,11 +115,6 @@ Style/FormatStringToken:
 Style/RequireOrder:
   Enabled: true
 
-RSpec/SpecFilePathFormat:
-  Enabled: true
-  Exclude:
-    - spec/rubocop/cop/rspec/mixin/**/*.rb
-
 # Enable some of RuboCop's pending cops.
 
 Layout/LineContinuationSpacing:
@@ -139,7 +134,7 @@ Style/RedundantStringEscape:
 Style/ReturnNilInPredicateMethodDefinition:
   Enabled: true
 
-# Enable our own pending cops.
+# Enable pending rubocop-rspec cops.
 
 RSpec/BeEmpty:
   Enabled: true
